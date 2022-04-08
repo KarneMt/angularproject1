@@ -1,0 +1,15 @@
+
+.button {
+  cursor: crosshair;
+  font-family: Arial;
+  color: #FFFFFF;
+  background-color: #0101DF;
+  border-color: #0101DF;
+  border-style: inset;
+  padding: 500px 32px;
+}
+
+.sidenav {
+    height: 100%;
+    width: 500px
+}

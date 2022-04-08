@@ -7,4 +7,11 @@ import { Component } from '@angular/core';
 })
 export class HomeComponent {
   title = 'angularproject1';
+
+  public arr: any[] = [
+    { id: '1', value: 'erster', group: 'team 1' },
+    { id: '2', value: 'zweiter', group: 'team 2' },
+    { id: '3', value: 'dritter', group: 'team 1' },
+    { id: '4', value: 'vierter', group: 'team 2' }
+  ]
 }

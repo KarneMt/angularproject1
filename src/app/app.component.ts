@@ -1,10 +1,31 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
-  title = 'angularproject1';
+
+
+export class AppComponent implements OnInit {
+
+  userIP = ''
+
+  constructor(private httpClient: HttpClient) { }
+  ngOnInit(): void {
+    this.loadIp();
+  }
+
+  loadIp() {
+    this.httpClient.get('https://jsonip.com').subscribe(
+      (value: any) => {
+        console.log(value);
+        this.userIP = value.ip;
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
 }

@@ -1,0 +1,14 @@
+
+<mat-drawer-container class="example-container" autosize>
+  <mat-drawer #drawer class="sidenav" mode="side">
+    <ul>
+      <li><a [routerLink]="['/index']">Index</a></li>
+      <li><a [routerLink]="['/']">Home</a></li>
+    </ul>
+  </mat-drawer>
+  <div>
+    <button mat-fab class="button" (click)="drawer.toggle()">
+      <mat-icon>home</mat-icon>
+    </button>
+  </div>
+</mat-drawer-container>
