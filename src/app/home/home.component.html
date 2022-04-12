@@ -1,7 +1,3 @@
-<p>Home works</p>
-<a [routerLink]="['/index']">Index</a>
-<a [routerLink]="['/nav']">Nav</a>
-
 <!-- <a [routerLink]="['/']">Home</a>
 <a [routerLink]="['/admin']">Admin</a>
 <a [routerLink]="['/admin', 'details']">Admindetails</a> -->
@@ -18,7 +14,7 @@
 <form>
   Ihre E-Mail-Adresse: <input type="text" required /><br />
   Grund ihrer Nachricht:
-  <select>
+  <select required>
     <option>Allgemeine Frage</option>
     <option>Beleidigung</option>
     <option>Geheim</option>
@@ -32,3 +28,9 @@
   <button type="reset">Reset</button>
   <button type="submit">Submit</button>
 </form>
+
+<div>
+  {{contact.plz}}
+  {{contact.strasse}}
+  {{ val }}
+</div>

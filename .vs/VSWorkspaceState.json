@@ -11,6 +11,6 @@
     "\\src\\app\\shared\\pipes\\order-by",
     "\\src\\app\\shared\\pipes\\simpleOrderBy"
   ],
-  "SelectedNode": "\\src\\app\\app.module.ts",
+  "SelectedNode": "\\src\\app\\index\\index.component.ts",
   "PreviewInSolutionExplorer": false
 }

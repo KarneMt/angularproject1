@@ -12,6 +12,8 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ErfolgreichComponent } from './erfolgreich/erfolgreich.component';
 
 
 
@@ -19,7 +21,8 @@ import { HttpClientModule } from '@angular/common/http';
 const routes: Routes = [
   { path: "", component: HomeComponent },
   { path: "index", component: IndexComponent },
-  { path: "nav", component: NavbarComponent }
+  { path: "nav", component: NavbarComponent },
+  { path: "erfolreich", component: ErfolgreichComponent }
 ];
 
 @NgModule({
@@ -30,6 +33,7 @@ const routes: Routes = [
     OrderByPipe,
     SimpleOrderByPipe,
     NavbarComponent,
+    ErfolgreichComponent,
     
   ],
   imports: [
@@ -39,7 +43,9 @@ const routes: Routes = [
     MatSliderModule,
     MatSidenavModule,
     MatIconModule,
-    HttpClientModule
+    FormsModule,
+    HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

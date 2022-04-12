@@ -6,6 +6,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent {
+  contact: any = { plz: '12345', strasse: 'Hausmannsweg 1' };
+  val: string = 'IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII';
   title = 'angularproject1';
 
   public arr: any[] = [

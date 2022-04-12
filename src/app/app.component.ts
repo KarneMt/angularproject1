@@ -28,4 +28,14 @@ export class AppComponent implements OnInit {
       }
     );
   }
+
+  isToggled: boolean = false;
+
+  toggle() {
+    this.isToggled = !this.isToggled;
+    console.log(this.isToggled)
+  }
+
+
+  
 }
