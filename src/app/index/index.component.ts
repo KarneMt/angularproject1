@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnInit, OnChanges, Input, SimpleChanges, Output } from '@angular/core';
-
+import { Router } from '@angular/router';
 
 interface Contact {
   vorname: string
@@ -20,9 +20,15 @@ interface Contact {
 
 export class IndexComponent implements OnInit{
 
-  constructor() {
-  }
+  constructor(public route: Router) {
+      }
 
+  eingabefehlt: boolean = false
+  vornamefehlt: boolean = false
+  nachnamefehlt: boolean = false
+  emailfehlt: boolean = false
+  nachrichtfehlt: boolean = false
+  i: number = 0;
   onClickSubmit(data: any , contact: Contact) {
     contact.vorname = data.firstname 
     contact.nachname = data.lastname
@@ -33,7 +39,40 @@ export class IndexComponent implements OnInit{
     contact.plz = data.postalcode
     contact.nachricht = data.nachricht
 
+
+
     console.log(contact)
+
+    this.i = +contact.vorname.length;
+    console.log(this.i)
+    if (contact.vorname.length > 0 && contact.nachname.length > 0 && contact.email.length > 0 && contact.nachricht.length > 0) {
+
+      //AN DATENBANK SENDEN
+
+      this.route.navigate(['/erfolreich']);
+    } else {
+      this.eingabefehlt = false
+      this.nachnamefehlt = false
+      this.vornamefehlt = false
+      this.emailfehlt = false
+      this.nachrichtfehlt = false
+      if (contact.vorname.length < 1) {
+        this.eingabefehlt = true
+        this.vornamefehlt = true
+      }
+      if (contact.nachname.length < 1) {
+        this.eingabefehlt = true
+        this.nachnamefehlt = true
+      }
+      if (contact.email.length < 1) {
+        this.eingabefehlt = true
+        this.emailfehlt = true
+      }
+      if (contact.nachricht.length < 1) {
+        this.eingabefehlt = true
+        this.nachrichtfehlt = true
+      }
+    }
   }
 
   ngOnInit(): void {

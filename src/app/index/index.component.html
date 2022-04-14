@@ -5,6 +5,23 @@
       <div class="px-4 sm:px-0">
         <h1 class="text-lg font-medium leading-6 text-gray-900">Kontaktanfrage</h1>
       </div>
+      <div *ngIf="eingabefehlt" role="alert">
+        <div class="bg-red-500 text-white font-bold rounded-t px-4 py-2">
+          Benötigte Eingaben fehlen
+        </div>
+        <div *ngIf="vornamefehlt" class="border border-t-0 border-red-400 rounded-b bg-red-100 px-4 py-3 text-red-700">
+          <p>Der Vorname fehlt</p>
+        </div>
+        <div *ngIf="nachnamefehlt" class="border border-t-0 border-red-400 rounded-b bg-red-100 px-4 py-3 text-red-700">
+          <p>Der Nachname fehlt</p>
+        </div>
+        <div *ngIf="emailfehlt" class="border border-t-0 border-red-400 rounded-b bg-red-100 px-4 py-3 text-red-700">
+          <p>Eine E-Mail Adresse fehlt</p>
+        </div>
+        <div *ngIf="nachrichtfehlt" class="border border-t-0 border-red-400 rounded-b bg-red-100 px-4 py-3 text-red-700">
+          <p>Eine Nachricht fehlt</p>
+        </div>
+      </div>
     </div>
     <div class="mt-5 md:mt-0 md:col-span-2">
       <form action="#" #message = "ngForm" (ngSubmit)="onClickSubmit(message.value, message.value)" >

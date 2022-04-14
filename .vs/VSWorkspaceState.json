@@ -3,14 +3,14 @@
     "",
     "\\src",
     "\\src\\app",
-    "\\src\\app\\home",
-    "\\src\\app\\index",
     "\\src\\app\\navbar",
     "\\src\\app\\shared",
     "\\src\\app\\shared\\pipes",
     "\\src\\app\\shared\\pipes\\order-by",
-    "\\src\\app\\shared\\pipes\\simpleOrderBy"
+    "\\src\\app\\shared\\pipes\\simpleOrderBy",
+    "\\src\\assets",
+    "\\src\\environments"
   ],
-  "SelectedNode": "\\src\\app\\index\\index.component.ts",
+  "SelectedNode": "\\angular.json",
   "PreviewInSolutionExplorer": false
 }
