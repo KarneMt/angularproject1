@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { CookieService } from 'ngx-cookie-service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -11,8 +13,15 @@ import { HttpClient } from '@angular/common/http';
 export class AppComponent implements OnInit {
 
   userIP = ''
+  userNameCookie: boolean = false
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient, private cookieService: CookieService, public route: Router) {
+    let value = this.cookieService.get('User-Cookie');
+    if (value.length > 0) {
+      this.userNameCookie = true
+    }
+  }
+
   ngOnInit(): void {
     this.loadIp();
   }

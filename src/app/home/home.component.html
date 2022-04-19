@@ -2,7 +2,10 @@
 <a [routerLink]="['/admin']">Admin</a>
 <a [routerLink]="['/admin', 'details']">Admindetails</a> -->
 
-<h1>Sortierung ['group', 'value']</h1>
+<h1>oder sollen wir Sie "{{usernameCookie}}" nennen?</h1>
+
+
+<h2>Sortierung ['group', 'value']</h2>
 <ul>
   <li *ngFor="let a of (arr | simpleOrderBy:['group', 'value']:'ASC'); index as index">{{ index+1 }}. {{ a.group }} - {{ a.value  }}</li>
 </ul>

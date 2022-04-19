@@ -14,6 +14,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ErfolgreichComponent } from './erfolgreich/erfolgreich.component';
+import { LoginComponent } from './login/login.component';
+import { CookieService } from 'ngx-cookie-service';
+import { LogoutComponent } from './logout/logout.component';
 
 
 
@@ -22,7 +25,9 @@ const routes: Routes = [
   { path: "", component: HomeComponent },
   { path: "index", component: IndexComponent },
   { path: "nav", component: NavbarComponent },
-  { path: "erfolreich", component: ErfolgreichComponent }
+  { path: "erfolreich", component: ErfolgreichComponent },
+  { path: "login", component: LoginComponent },
+  { path: "logout", component: LogoutComponent }
 ];
 
 @NgModule({
@@ -34,6 +39,8 @@ const routes: Routes = [
     SimpleOrderByPipe,
     NavbarComponent,
     ErfolgreichComponent,
+    LoginComponent,
+    LogoutComponent,
     
   ],
   imports: [
@@ -47,7 +54,7 @@ const routes: Routes = [
     HttpClientModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

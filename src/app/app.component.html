@@ -34,7 +34,7 @@
           <img class="hidden lg:block h-8 w-auto" src="https://upload.wikimedia.org/wikipedia/commons/6/6c/Berliner_Polizei.svg" alt="Workflow">
         </div>
         <div class="hidden sm:block sm:ml-6">
-          <div class="flex space-x-4">
+          <div *ngIf="userNameCookie" class="flex space-x-4">
             <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
 
             <!-- <a [routerLink]="['/']" class="bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium" aria-current="page">Startseite</a> -->
@@ -45,7 +45,7 @@
 
             <a [routerLink]="['/nav']" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Nav</a>
 
-            <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Kalendar</a>
+            <a [routerLink]="['/logout']" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Logout</a>
           </div>
         </div>
       </div>
@@ -53,7 +53,7 @@
 
 
         <!-- Profile dropdown -->
-        <div class="ml-3 relative">
+        <div *ngIf="userNameCookie" class="ml-3 relative">
           <div>
             <button type="button" class="bg-gray-800 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white" id="user-menu-button" aria-expanded="false" aria-haspopup="true" (click)="toggle()">
               <span class="sr-only">Open user menu</span>
@@ -75,7 +75,7 @@
             <!-- Active: "bg-gray-100", Not Active: "" -->
             <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-0">Dein Profil</a>
             <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-1">Einstellungen</a>
-            <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-2">Abmelden</a>
+            <a [routerLink]="['/logout']" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-2">Abmelden</a>
           </div>
         </div>
       </div>
