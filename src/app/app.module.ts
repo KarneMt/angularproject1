@@ -18,9 +18,11 @@ import { LoginComponent } from './login/login.component';
 import { CookieService } from 'ngx-cookie-service';
 import { LogoutComponent } from './logout/logout.component';
 import { MenueComponent } from './menue/menue.component';
-
-
-
+import { StoreModule } from '@ngrx/store';
+import { storeReducer } from './store.reducer';
+import { CounterTestComponent } from './counter-test/counter-test.component';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from '../environments/environment'; // Angular CLI environment
 
 const routes: Routes = [
   { path: "", component: HomeComponent },
@@ -28,7 +30,8 @@ const routes: Routes = [
   { path: "nav", component: NavbarComponent },
   { path: "erfolreich", component: ErfolgreichComponent },
   { path: "login", component: LoginComponent },
-  { path: "logout", component: LogoutComponent }
+  { path: "logout", component: LogoutComponent },
+  { path: "counter-test", component: CounterTestComponent }
 ];
 
 @NgModule({
@@ -43,6 +46,7 @@ const routes: Routes = [
     LoginComponent,
     LogoutComponent,
     MenueComponent,
+    CounterTestComponent,
     
   ],
   imports: [
@@ -54,7 +58,14 @@ const routes: Routes = [
     MatIconModule,
     FormsModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BrowserModule,
+    StoreModule.forRoot({ count: storeReducer }),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25, // Retains last 25 states
+      logOnly: environment.production, // Restrict extension to log-only mode
+      autoPause: true, // Pauses recording actions and state changes when the extension window is not open
+    }),
   ],
   providers: [CookieService],
   bootstrap: [AppComponent]
