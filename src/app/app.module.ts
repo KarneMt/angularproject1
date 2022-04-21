@@ -17,6 +17,7 @@ import { ErfolgreichComponent } from './erfolgreich/erfolgreich.component';
 import { LoginComponent } from './login/login.component';
 import { CookieService } from 'ngx-cookie-service';
 import { LogoutComponent } from './logout/logout.component';
+import { MenueComponent } from './menue/menue.component';
 
 
 
@@ -41,6 +42,7 @@ const routes: Routes = [
     ErfolgreichComponent,
     LoginComponent,
     LogoutComponent,
+    MenueComponent,
     
   ],
   imports: [

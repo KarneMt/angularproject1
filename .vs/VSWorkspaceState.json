@@ -3,15 +3,15 @@
     "",
     "\\src",
     "\\src\\app",
-    "\\src\\app\\erfolgreich",
-    "\\src\\app\\home",
-    "\\src\\app\\index",
+    "\\src\\app\\login",
+    "\\src\\app\\logout",
+    "\\src\\app\\navbar",
     "\\src\\app\\shared",
     "\\src\\app\\shared\\pipes",
     "\\src\\app\\shared\\pipes\\simpleOrderBy",
     "\\src\\assets",
     "\\src\\environments"
   ],
-  "SelectedNode": "\\src\\app\\index\\index.component.ts",
+  "SelectedNode": "\\src\\app\\app.component.html",
   "PreviewInSolutionExplorer": false
 }
