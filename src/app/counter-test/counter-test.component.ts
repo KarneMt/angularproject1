@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
-import { increment, decrement, reset } from '../store.actions';
+import { increment, decrement, reset } from '../store/store.actions';
 import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
 

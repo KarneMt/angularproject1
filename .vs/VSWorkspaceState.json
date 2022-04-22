@@ -3,15 +3,14 @@
     "",
     "\\src",
     "\\src\\app",
-    "\\src\\app\\login",
-    "\\src\\app\\logout",
-    "\\src\\app\\navbar",
+    "\\src\\app\\counter-test",
+    "\\src\\app\\index",
+    "\\src\\app\\menue",
     "\\src\\app\\shared",
     "\\src\\app\\shared\\pipes",
     "\\src\\app\\shared\\pipes\\simpleOrderBy",
-    "\\src\\assets",
-    "\\src\\environments"
+    "\\src\\assets"
   ],
-  "SelectedNode": "\\src\\app\\app.component.html",
+  "SelectedNode": "\\src\\app\\menue\\menue.component.html",
   "PreviewInSolutionExplorer": false
 }

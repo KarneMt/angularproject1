@@ -19,10 +19,11 @@ import { CookieService } from 'ngx-cookie-service';
 import { LogoutComponent } from './logout/logout.component';
 import { MenueComponent } from './menue/menue.component';
 import { StoreModule } from '@ngrx/store';
-import { storeReducer } from './store.reducer';
+import { storeReducer } from './store/store.reducer';
 import { CounterTestComponent } from './counter-test/counter-test.component';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment'; // Angular CLI environment
+import { reducers, metaReducers } from '../app/store/hydration/';
 
 const routes: Routes = [
   { path: "", component: HomeComponent },
@@ -60,7 +61,7 @@ const routes: Routes = [
     HttpClientModule,
     ReactiveFormsModule,
     BrowserModule,
-    StoreModule.forRoot({ count: storeReducer }),
+    StoreModule.forRoot(reducers, { metaReducers }),
     StoreDevtoolsModule.instrument({
       maxAge: 25, // Retains last 25 states
       logOnly: environment.production, // Restrict extension to log-only mode
