@@ -19,11 +19,12 @@ import { CookieService } from 'ngx-cookie-service';
 import { LogoutComponent } from './logout/logout.component';
 import { MenueComponent } from './menue/menue.component';
 import { StoreModule } from '@ngrx/store';
-import { storeReducer } from './store/store.reducer';
 import { CounterTestComponent } from './counter-test/counter-test.component';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment'; // Angular CLI environment
 import { reducers, metaReducers } from '../app/store/hydration/';
+import { ActionTypes } from './store/store.actions';
+
 
 const routes: Routes = [
   { path: "", component: HomeComponent },

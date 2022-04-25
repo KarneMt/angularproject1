@@ -3,14 +3,14 @@
     "",
     "\\src",
     "\\src\\app",
-    "\\src\\app\\counter-test",
-    "\\src\\app\\index",
+    "\\src\\app\\logout",
     "\\src\\app\\menue",
     "\\src\\app\\shared",
     "\\src\\app\\shared\\pipes",
     "\\src\\app\\shared\\pipes\\simpleOrderBy",
-    "\\src\\assets"
+    "\\src\\app\\store",
+    "\\src\\app\\store\\hydration"
   ],
-  "SelectedNode": "\\src\\app\\menue\\menue.component.html",
+  "SelectedNode": "\\src\\app\\app.module.ts",
   "PreviewInSolutionExplorer": false
 }

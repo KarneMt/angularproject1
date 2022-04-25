@@ -1,10 +1,14 @@
 import { ActionReducer, INIT, UPDATE } from "@ngrx/store";
 import { RootState } from ".";
+import { ActionTypes } from "../store.actions";
 
 export const hydrationMetaReducer = (
   reducer: ActionReducer<RootState>
 ): ActionReducer<RootState> => {
   return (state, action) => {
+    if (action.type === ActionTypes.LOGOUT) {
+      state = undefined;
+    }
     if (action.type === INIT || action.type === UPDATE) {
       const storageValue = localStorage.getItem("state");
       if (storageValue) {
