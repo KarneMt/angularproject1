@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { CookieService } from 'ngx-cookie-service';
+import { Observable } from 'rxjs';
+import { message } from '../store/store.actions';
 
 interface Contact {
   vorname: string
@@ -20,14 +23,22 @@ interface Contact {
 })
 
 export class IndexComponent implements OnInit{
-  contactdata: any = { vorname: '', nachname: '', email: '', land: '', adresse: '', stadt: '', plz: '', nachricht: '' }
-  
+  contactdata: any = {
+    vorname: '', nachname: '', email: '', land: '', adresse: '', stadt: '', plz: '', nachricht: ''
+  }
+  contact$!: Observable<Contact>;
 
-  constructor(private cookieService: CookieService, public route: Router) {
+
+  constructor(private cookieService: CookieService, private store: Store<{ count: number }>,  public route: Router) {
     let value = this.cookieService.get('User-Cookie');
     if (value.length <= 0) {
       this.route.navigate(['/login']);
     }
+  }
+
+  message() {
+    this.store.dispatch(message());
+    // TODO: Dispatch an increment action
   }
 
   eingabefehlt: boolean = false
@@ -53,6 +64,7 @@ export class IndexComponent implements OnInit{
     if (contact.vorname.length > 0 && contact.nachname.length > 0 && contact.email.length > 0 && contact.nachricht.length > 0) {
 
       //AN DATENBANK SENDEN
+      this.message()
 
       this.eingabefehlt = false
       this.vornamefehlt = false

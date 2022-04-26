@@ -1,4 +1,4 @@
-import { Action, createAction } from '@ngrx/store';
+import { Action, createAction, props } from '@ngrx/store';
 
 export const increment = createAction('[Store Component] Increment');
 export const decrement = createAction('[Store Component] Decrement');
@@ -11,3 +11,5 @@ export class ActionTypes {
 export class Logout implements Action {
   readonly type = ActionTypes.LOGOUT;
 }
+
+export const message = createAction('[Store Component] Message');
