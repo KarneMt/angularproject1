@@ -24,6 +24,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment'; // Angular CLI environment
 import { reducers, metaReducers } from '../app/store/hydration/';
 import { ActionTypes } from './store/store.actions';
+import { AnfragenComponent } from './anfragen/anfragen.component';
 
 
 const routes: Routes = [
@@ -33,7 +34,8 @@ const routes: Routes = [
   { path: "erfolreich", component: ErfolgreichComponent },
   { path: "login", component: LoginComponent },
   { path: "logout", component: LogoutComponent },
-  { path: "counter-test", component: CounterTestComponent }
+  { path: "counter-test", component: CounterTestComponent },
+  { path: "anfragen", component: AnfragenComponent },
 ];
 
 @NgModule({
@@ -49,6 +51,7 @@ const routes: Routes = [
     LogoutComponent,
     MenueComponent,
     CounterTestComponent,
+    AnfragenComponent,
     
   ],
   imports: [

@@ -12,4 +12,14 @@ export class Logout implements Action {
   readonly type = ActionTypes.LOGOUT;
 }
 
-export const message = createAction('[Store Component] Message');
+export const message = createAction('[Store Component] Message',
+  props<{
+    vorname: string;
+    nachname: string;
+    email: string;
+    land: string;
+    adresse: string;
+    stadt: string;
+    plz: string;
+    nachricht: string;
+  }>());

@@ -17,7 +17,7 @@ export const storeReducer = createReducer(
 
 export const storeMReducer = createReducer(
   initialState.contact,
-  on(message, (state) => state = {
-    vorname: 'b', nachname: 'b', email: 'g', land: 'sg', adresse: 'sg', stadt: 's', plz: 'g', nachricht: 's'
+  on(message, (state, { vorname, nachname, email, land, adresse, stadt, plz, nachricht }) => state = {
+    vorname, nachname, email: email, land, adresse, stadt, plz, nachricht
   }),
 );

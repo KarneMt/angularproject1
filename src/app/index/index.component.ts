@@ -36,8 +36,8 @@ export class IndexComponent implements OnInit{
     }
   }
 
-  message() {
-    this.store.dispatch(message());
+  message(contact: Contact) {
+    this.store.dispatch(message({ vorname: contact.vorname, nachname: contact.nachname, email: contact.email, land: contact.land, adresse: contact.adresse, stadt: contact.stadt, plz: contact.plz, nachricht: contact.nachricht}));
     // TODO: Dispatch an increment action
   }
 
@@ -64,7 +64,7 @@ export class IndexComponent implements OnInit{
     if (contact.vorname.length > 0 && contact.nachname.length > 0 && contact.email.length > 0 && contact.nachricht.length > 0) {
 
       //AN DATENBANK SENDEN
-      this.message()
+      this.message(contact)
 
       this.eingabefehlt = false
       this.vornamefehlt = false
