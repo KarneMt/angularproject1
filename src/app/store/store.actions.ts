@@ -1,4 +1,5 @@
 import { Action, createAction, props } from '@ngrx/store';
+import { Contact } from '../index/index.component';
 
 export const increment = createAction('[Store Component] Increment');
 export const decrement = createAction('[Store Component] Decrement');
@@ -22,4 +23,7 @@ export const message = createAction('[Store Component] Message',
     stadt: string;
     plz: string;
     nachricht: string;
-  }>());
+  }>()
+);
+
+

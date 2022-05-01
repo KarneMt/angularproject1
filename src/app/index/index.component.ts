@@ -5,7 +5,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { Observable } from 'rxjs';
 import { message } from '../store/store.actions';
 
-interface Contact {
+export interface Contact {
   vorname: string
   nachname: string
   email: string
@@ -29,7 +29,7 @@ export class IndexComponent implements OnInit{
   contact$!: Observable<Contact>;
 
 
-  constructor(private cookieService: CookieService, private store: Store<{ count: number }>,  public route: Router) {
+  constructor(private cookieService: CookieService, private store: Store<{ contact: Contact }>,  public route: Router) {
     let value = this.cookieService.get('User-Cookie');
     if (value.length <= 0) {
       this.route.navigate(['/login']);
@@ -40,7 +40,7 @@ export class IndexComponent implements OnInit{
     this.store.dispatch(message({ vorname: contact.vorname, nachname: contact.nachname, email: contact.email, land: contact.land, adresse: contact.adresse, stadt: contact.stadt, plz: contact.plz, nachricht: contact.nachricht}));
     // TODO: Dispatch an increment action
   }
-
+  anfragenStore: boolean = false
   eingabefehlt: boolean = false
   vornamefehlt: boolean = false
   nachnamefehlt: boolean = false
@@ -65,6 +65,7 @@ export class IndexComponent implements OnInit{
 
       //AN DATENBANK SENDEN
       this.message(contact)
+      this.anfragenStore = true
 
       this.eingabefehlt = false
       this.vornamefehlt = false
@@ -99,6 +100,7 @@ export class IndexComponent implements OnInit{
   }
 
   ngOnInit(): void {
+  
   }
 
 }

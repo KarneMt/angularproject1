@@ -5,8 +5,6 @@ import { increment, decrement, reset } from '../store/store.actions';
 import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
 
-
-
 @Component({
   selector: 'app-counter-test',
   templateUrl: './counter-test.component.html',

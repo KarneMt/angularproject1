@@ -3,14 +3,12 @@
     "",
     "\\src",
     "\\src\\app",
-    "\\src\\app\\counter-test",
-    "\\src\\app\\logout",
-    "\\src\\app\\menue",
-    "\\src\\app\\shared",
-    "\\src\\app\\shared\\pipes",
+    "\\src\\app\\anfragen",
+    "\\src\\app\\index",
+    "\\src\\app\\Model",
     "\\src\\app\\store",
     "\\src\\app\\store\\hydration"
   ],
-  "SelectedNode": "\\src\\app\\store\\hydration\\hydration.reducer.ts",
+  "SelectedNode": "\\src\\app\\anfragen\\anfragen.component.ts",
   "PreviewInSolutionExplorer": false
 }
