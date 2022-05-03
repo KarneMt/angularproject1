@@ -4,11 +4,13 @@
     "\\src",
     "\\src\\app",
     "\\src\\app\\anfragen",
+    "\\src\\app\\counter-test",
+    "\\src\\app\\erfolgreich",
     "\\src\\app\\index",
     "\\src\\app\\Model",
     "\\src\\app\\store",
     "\\src\\app\\store\\hydration"
   ],
-  "SelectedNode": "\\src\\app\\anfragen\\anfragen.component.ts",
+  "SelectedNode": "\\src\\app\\anfragen\\anfragen.component.html",
   "PreviewInSolutionExplorer": false
 }

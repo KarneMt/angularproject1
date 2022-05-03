@@ -26,9 +26,7 @@ export class IndexComponent implements OnInit{
   contactdata: any = {
     vorname: '', nachname: '', email: '', land: '', adresse: '', stadt: '', plz: '', nachricht: ''
   }
-  contact$!: Observable<Contact>;
-
-
+  
   constructor(private cookieService: CookieService, private store: Store<{ contact: Contact }>,  public route: Router) {
     let value = this.cookieService.get('User-Cookie');
     if (value.length <= 0) {
@@ -37,10 +35,12 @@ export class IndexComponent implements OnInit{
   }
 
   message(contact: Contact) {
-    this.store.dispatch(message({ vorname: contact.vorname, nachname: contact.nachname, email: contact.email, land: contact.land, adresse: contact.adresse, stadt: contact.stadt, plz: contact.plz, nachricht: contact.nachricht}));
+    this.store.dispatch(message({ vorname: contact.vorname, nachname: contact.nachname, email: contact.email, land: contact.land, adresse: contact.adresse, stadt: contact.stadt, plz: contact.plz, nachricht: contact.nachricht }));
     // TODO: Dispatch an increment action
+    console.log(contact)
+    console.log(this.contactdata)
   }
-  anfragenStore: boolean = false
+  anfragenStore: boolean = true //Button für Storedaten, später löschen
   eingabefehlt: boolean = false
   vornamefehlt: boolean = false
   nachnamefehlt: boolean = false
@@ -59,7 +59,7 @@ export class IndexComponent implements OnInit{
     contact.nachricht = data.nachricht
 
     this.contactdata = { vorname: data.firstname, nachname: data.lastname, email: data.emailaddress, land: data.country, adresse: data.streetaddress, stadt: data.city, plz: data.postalcode, nachricht: data.nachricht }
-    console.log(contact)
+
 
     if (contact.vorname.length > 0 && contact.nachname.length > 0 && contact.email.length > 0 && contact.nachricht.length > 0) {
 

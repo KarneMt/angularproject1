@@ -1,9 +1,9 @@
-import { createFeatureSelector, createSelector } from "@ngrx/store";
-import { Contact } from "../Model/model";
+import { createFeatureSelector, createSelector, State } from "@ngrx/store";
+
 
 export const loadAnfragen = createSelector(
   createFeatureSelector('contact'),
-  (state: Contact[]) => {
-    return state;
+  (state: any) => {
+    return state= "{"+ "vorname: " + '"' + state.vorname + '"' + ", nachname: " + '"' + state.nachname + '"' + ", email: " + '"' + state.email + '"' + ", adresse: " + '"' + state.adresse + '"' + ", land: " + '"' + state.land + '"' + ", plz: " + '"' + state.plz + '"' + ", stadt: " + '"' + state.stadt + '"' + ", nachricht: " + '"' + state.nachricht + '"' + "}"
   }
 );
