@@ -58,7 +58,7 @@ export class AnfragenComponent implements OnInit {
   }
 
   private prepare: any = {
-    watermark: 'Entwurf'
+    //watermark: 'Entwurf'
   }
 
   generateFile() {
@@ -95,7 +95,7 @@ export class AnfragenComponent implements OnInit {
                 body: [
                   [
                     {
-                      text: 'Polizei Berlin',
+                      text: 'Ihre Nachricht an uns',
                       style: 'poltitle'
                     },
                     {
@@ -106,14 +106,7 @@ export class AnfragenComponent implements OnInit {
                   ],
                   [
                     {
-                      text: 'vgnrline',
-                      style: 'vgnr'
-                    },
-                    {}
-                  ],
-                  [
-                    {
-                      text: 'prepare.userline',
+                      text: 'Name, Vorname',
                       style: 'author',
                       border: [false, false, false, true]
                     },
@@ -194,20 +187,6 @@ export class AnfragenComponent implements OnInit {
             fit: '30',
             version: 3
           },
-          // {
-          //   svg: 'barcode',
-          //   //fit: [80*2.54,35*2.54],
-          //   absolutePosition: { x: 193*2.54, y: 35*2.54 },
-          //   width: 100,
-          //   height: 350,
-          // },
-          // {
-          //   svg: 'barcode',
-          //   //fit: [80*2.54,35*2.54],
-          //   absolutePosition: { x: 5*2.54, y: 220*2.54 },
-          //   width: 100,
-          //   height: 350,
-          // },
           {
             absolutePosition: { x: 0, y: 0 },
             canvas:
