@@ -25,6 +25,7 @@ import { environment } from '../environments/environment'; // Angular CLI enviro
 import { reducers, metaReducers } from '../app/store/hydration/';
 import { ActionTypes } from './store/store.actions';
 import { AnfragenComponent } from './anfragen/anfragen.component';
+import { RegistrierungComponent } from './registrierung/registrierung.component';
 
 
 const routes: Routes = [
@@ -36,6 +37,7 @@ const routes: Routes = [
   { path: "logout", component: LogoutComponent },
   { path: "counter-test", component: CounterTestComponent },
   { path: "anfragen", component: AnfragenComponent },
+  { path: "registrierung", component: RegistrierungComponent },
 ];
 
 @NgModule({
@@ -52,6 +54,7 @@ const routes: Routes = [
     MenueComponent,
     CounterTestComponent,
     AnfragenComponent,
+    RegistrierungComponent,
     
   ],
   imports: [

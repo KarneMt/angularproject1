@@ -17,7 +17,7 @@ import * as pdfFonts from "pdfmake/build/vfs_fonts";
 })
 
 export class AnfragenComponent implements OnInit {
-  contact$: Observable<string>;
+  //contact$: Observable<string>;
   ll: any;
 
   private pdfM: any
@@ -38,9 +38,8 @@ export class AnfragenComponent implements OnInit {
     this.page = 1
 
     //Beide funktionieren
-    //this.contact$ = store.select(loadAAnfragen); 
-    this.contact$ = this.store.pipe(select(loadAnfragen));
-    this.ll = this.contact$
+    //this.contact$ = store.select(loadAnfragen); 
+    //this.contact$ = this.store.pipe(select(loadAnfragen));
     store.select('contact').subscribe((data: any) => this.ll = data);
     console.log(this.ll)
     this.contact = this.ll

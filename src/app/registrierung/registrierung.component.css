@@ -1,11 +1,11 @@
+.error{
+    color: red
+}
+
 form input .ng-touched, .ng-dirty .ng-invalid {
   border: red 2px solid
 }
 
 form input .ng-touched, .ng-dirty .ng-valid {
   border: green 2px solid
-}
-
-.error{
-    color: red
 }
