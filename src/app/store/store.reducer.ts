@@ -1,11 +1,15 @@
-import { createReducer, on, State } from '@ngrx/store';
+import { createReducer, on } from '@ngrx/store';
 import { increment, decrement, reset, message } from './store.actions';
+import { Contact } from "../Model/model";
 
-export const initialState = {
-  count: 0,
-  contact: {
-    vorname: '', nachname: '', email: '', land: '', adresse: '', stadt: '', plz: '', nachricht: ''
-  }
+export interface State {
+  count: number
+  contact: Contact[]
+}
+
+export const initialState: State = {
+  count: 1,
+  contact: []
 };
 
 export const storeReducer = createReducer(
@@ -17,7 +21,10 @@ export const storeReducer = createReducer(
 
 export const storeMReducer = createReducer(
   initialState.contact,
-  on(message, (state, { vorname, nachname, email, land, adresse, stadt, plz, nachricht }) => state = {
-    vorname, nachname, email: email, land, adresse, stadt, plz, nachricht
+  on(message, (state, action) => {
+    return {
+      ...state,
+      contact: action.contact,
+    }
   }),
 );

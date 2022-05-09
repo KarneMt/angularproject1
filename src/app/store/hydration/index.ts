@@ -1,21 +1,11 @@
-import { ActionReducerMap, MetaReducer, Store } from "@ngrx/store";
-import { storeMReducer, storeReducer } from "../store.reducer";
+import { ActionReducerMap, MetaReducer } from "@ngrx/store";
+import { Contact } from "../../Model/model";
+import { State, storeMReducer, storeReducer } from "../store.reducer";
 import { hydrationMetaReducer } from "./hydration.reducer";
 
 export interface RootState {
   count: number,
-  contact: Contact,
-}
-
-export interface Contact {
-  vorname: string
-  nachname: string
-  email: string
-  land: string
-  adresse: string
-  stadt: string
-  plz: string
-  nachricht: string
+  contact: Contact[],
 }
 
 export const reducers: ActionReducerMap<RootState> = {

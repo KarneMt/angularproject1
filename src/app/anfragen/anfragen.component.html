@@ -1,5 +1,5 @@
 <!-- This example requires Tailwind CSS v2.0+ -->
-<div class="bg-white shadow overflow-hidden sm:rounded-lg">
+<div *ngIf="show" class="bg-white shadow overflow-hidden sm:rounded-lg">
   <div class="px-4 py-5 sm:px-6">
     <h3 class="text-lg leading-6 font-medium text-gray-900">Ihre Übermittlten Daten</h3>
     <p class="mt-1 max-w-2xl text-sm text-gray-500">Sehen Sie hier ihre übermittelte Nachricht ein.</p>
@@ -8,31 +8,31 @@
     <dl>
       <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
       <dt class="text-sm font-medium text-gray-500">Name:</dt>
-      <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">{{contact.nachname}}, {{contact.vorname}}</dd>
+      <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">{{anfragen!.contact.nachname}}, {{anfragen!.contact.vorname}}</dd>
   </div>
   <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
     <dt class="text-sm font-medium text-gray-500">E-Mail:</dt>
-    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">{{contact.email}}</dd>
+    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">{{anfragen!.contact.email}}</dd>
   </div>
   <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
     <dt class="text-sm font-medium text-gray-500">Land:</dt>
-    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">{{contact.land}}</dd>
+    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">{{anfragen!.contact.land}}</dd>
   </div>
   <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
     <dt class="text-sm font-medium text-gray-500">Adresse:</dt>
-    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">{{contact.adresse}}</dd>
+    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">{{anfragen!.contact.adresse}}</dd>
   </div>
   <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
     <dt class="text-sm font-medium text-gray-500">Postleitzahl:</dt>
-    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">{{contact.plz}}</dd>
+    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">{{anfragen!.contact.plz}}</dd>
   </div>
   <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
     <dt class="text-sm font-medium text-gray-500">Stadt:</dt>
-    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">{{contact.stadt}}</dd>
+    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">{{anfragen!.contact.stadt}}</dd>
   </div>
   <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
     <dt class="text-sm font-medium text-gray-500">Ihre Nachricht:</dt>
-    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">{{contact.nachricht}}</dd>
+    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">{{anfragen!.contact.nachricht}}</dd>
   </div>
   <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
     <dt class="text-sm font-medium text-gray-500">Übermittelte Nachricht herunterladen</dt>
@@ -55,4 +55,7 @@
   </div>
   </dl>
 </div>
+</div>
+<div *ngIf="!show">
+  <p>Error 666 - Es konnte keine Daten geladen werden.</p>
 </div>

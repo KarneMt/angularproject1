@@ -2,13 +2,14 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { select, Store } from '@ngrx/store';
 import { CookieService } from 'ngx-cookie-service';
-import { Subscriber } from 'rxjs';
+import { empty, Subscriber } from 'rxjs';
 import { Observable } from 'rxjs';
 import { Contact} from '../Model/model';
 import { RootState } from '../store/hydration';
 import { loadAnfragen } from '../store/store.selectors';
 import * as pdfMake from 'pdfmake/build/pdfmake';
 import * as pdfFonts from "pdfmake/build/vfs_fonts";
+import { Content } from '@angular/compiler/src/render3/r3_ast';
 
 @Component({
   selector: 'app-anfragen',
@@ -17,17 +18,15 @@ import * as pdfFonts from "pdfmake/build/vfs_fonts";
 })
 
 export class AnfragenComponent implements OnInit {
-  //contact$: Observable<string>;
-  ll: any;
-
   private pdfM: any
   private pdfF: any
   page: number = 1
   public pdf = ''
 
+  anfragen: {contact : Contact} | undefined
+  time: string | undefined
+  show :boolean = false
 
-  @Input() contact: Contact = { vorname: '', nachname: '', email: '', land: '', adresse: '', stadt: '', plz: '', nachricht: '' }
-  @Input() time: string | undefined
   constructor(private cookieService: CookieService, private store: Store<RootState>, public route: Router) {
     let value = this.cookieService.get('User-Cookie');
     if (value.length <= 0) {
@@ -40,28 +39,33 @@ export class AnfragenComponent implements OnInit {
     //Beide funktionieren
     //this.contact$ = store.select(loadAnfragen); 
     //this.contact$ = this.store.pipe(select(loadAnfragen));
-    store.select('contact').subscribe((data: any) => this.ll = data);
-    console.log(this.ll)
-    this.contact = this.ll
-    this.time = new Date().toISOString().slice(0, 16)
-    this.time = this.time.replace("T", "-")
+    store.select('contact').subscribe((data:Contact[]) => {
+      if (data) {
+        this.anfragen = Object.assign(data)
+        if (this.anfragen) {
+          this.show = true
+          this.time = new Date().toISOString().slice(0, 16)
+          this.time = this.time.replace("T", "-")
+          this.generateFile(this.anfragen.contact, this.time)
 
+        }
+      }
+    })
   }
 
   pdfBericht() {
     var a = document.createElement('a');
-    a.download = this.time+'.pdf'; // 2022-04-11 12:30:22 - wassernixe 3.pdf
+    a.download = this.time+'.pdf';
     a.href = this.pdf;
     a.click();
 
   }
 
   private prepare: any = {
-    //watermark: 'Entwurf'
   }
 
-  generateFile() {
-    this.pdfF = this.pdfM.createPdf(this.getDefinitions(this.prepare))
+  generateFile(daten : any, zeit : any) {
+    this.pdfF = this.pdfM.createPdf(this.getDefinitions(this.prepare, daten, zeit))
     this.pdfF.getDataUrl((data: any) => {
       this.pdf = data
       console.log(data)
@@ -69,12 +73,10 @@ export class AnfragenComponent implements OnInit {
   }
 
 
-
   ngOnInit(): void {
-    this.generateFile()
   }
 
-  getDefinitions(prepare: any): any {
+  getDefinitions(prepare: any, daten : any, zeit : any): any {
     return {
       pageSize: 'A4',
       pageOrientation: 'p',
@@ -105,7 +107,7 @@ export class AnfragenComponent implements OnInit {
                   ],
                   [
                     {
-                      text: 'Name, Vorname',
+                      text: daten.nachname + ', ' + daten.vorname,
                       style: 'author',
                       border: [false, false, false, true]
                     },
@@ -128,6 +130,47 @@ export class AnfragenComponent implements OnInit {
         };
       },
 
+      // Content
+      content: [
+        { text: 'Ihre Anfrage', style: 'header' ,margin: [100, 70, 100, 20]},
+        {
+          style: 'tableExample',
+          color: '#444',
+          margin: [85, 10, 85, 80],
+          table: {
+            widths: [200, 200],
+            headerRows: 2,
+            //keepWithHeaderRows: 1,
+            body: [
+              [{ text: 'Name', style: 'tableHeader', colSpan: 2, alignment: 'center' }, {}],
+              [{ text: 'Nachname', style: 'tableHeader', alignment: 'center' }, { text: 'Vorname', style: 'tableHeader', alignment: 'center' }],
+              [daten.vorname, daten.nachname],
+              [{ text: 'Adresse', style: 'tableHeader', colSpan: 2, alignment: 'center' }, {}],
+              [{ colSpan: 1, rowSpan: 3, text: daten.adresse + '3\n' + daten.plz + ', ' + daten.stadt + '3\n' +  daten.land }, { text: 'E-Mail' , style: 'tableHeader', aligment: 'center'}],
+              [{}, {rowSpan: 2, text: daten.email}],
+              [{}, {}],
+              [{ text: 'Ihre Nachricht', style: 'tableHeader', colSpan: 2, alignment: 'center' }, {}],
+              [{ colSpan: 2, text: daten.nachricht}, {}],
+
+            ]
+          }
+
+        },
+
+
+
+
+
+
+
+
+
+
+
+      ],
+
+
+
       // footer
       footer(currentPage: { toString: () => string; }, pageCount: string) {
         return {
@@ -141,7 +184,7 @@ export class AnfragenComponent implements OnInit {
                 body: [
                   [
                     {
-                      text: 'vgnrline',
+                      text: 'Ihre Nachricht vom:',
                       style: 'footer'
                     },
                     {
@@ -152,7 +195,7 @@ export class AnfragenComponent implements OnInit {
                   ],
                   [
                     {
-                      text: 'doctime',
+                      text: zeit,
                       style: 'vgnr'
                     },
                     {}
@@ -176,13 +219,13 @@ export class AnfragenComponent implements OnInit {
         return [
           {
             absolutePosition: { x: 5 * 2.54, y: 35 * 2.54 },
-            qr: 'prepare.vgnr',
+            qr: 'https://paypal.me/KaiArneMoebert',
             fit: '30',
             version: 3
           },
           {
             absolutePosition: { x: 195 * 2.54, y: 270 * 2.54 },
-            qr: 'prepare.vgnr',
+            qr: 'https://paypal.me/KaiArneMoebert',
             fit: '30',
             version: 3
           },

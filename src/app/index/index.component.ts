@@ -1,20 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { CookieService } from 'ngx-cookie-service';
 import { Observable } from 'rxjs';
+import { Contact } from '../Model/model';
 import { message } from '../store/store.actions';
+import { v4 as uuidv4 } from 'uuid';
 
-export interface Contact {
-  vorname: string
-  nachname: string
-  email: string
-  land: string
-  adresse: string
-  stadt: string
-  plz: string
-  nachricht: string
-}
 
 @Component({
   selector: 'app-index',
@@ -22,12 +14,10 @@ export interface Contact {
   styleUrls: ['./index.component.css']
 })
 
-export class IndexComponent implements OnInit{
-  contactdata: any = {
-    vorname: '', nachname: '', email: '', land: '', adresse: '', stadt: '', plz: '', nachricht: ''
-  }
-  
-  constructor(private cookieService: CookieService, private store: Store<{ contact: Contact }>,  public route: Router) {
+export class IndexComponent {
+  contactdata: any = {}
+
+  constructor(private cookieService: CookieService, private store: Store<{ contact: Contact }>, public route: Router) {
     let value = this.cookieService.get('User-Cookie');
     if (value.length <= 0) {
       this.route.navigate(['/login']);
@@ -35,12 +25,19 @@ export class IndexComponent implements OnInit{
   }
 
   message(contact: Contact) {
-    this.store.dispatch(message({ vorname: contact.vorname, nachname: contact.nachname, email: contact.email, land: contact.land, adresse: contact.adresse, stadt: contact.stadt, plz: contact.plz, nachricht: contact.nachricht }));
+    let id: string = uuidv4();
+    contact.id = id;
+    this.contactdata = contact
+    this.anfragenStore = true
+
+
+
+
+    this.store.dispatch(message({ contact }));
     // TODO: Dispatch an increment action
-    console.log(contact)
-    console.log(this.contactdata)
   }
-  anfragenStore: boolean = true //Button für Storedaten, später löschen
+
+  anfragenStore: boolean = false //Button für Storedaten, später löschen
   eingabefehlt: boolean = false
   vornamefehlt: boolean = false
   nachnamefehlt: boolean = false
@@ -48,25 +45,11 @@ export class IndexComponent implements OnInit{
   nachrichtfehlt: boolean = false
   erfolgreich: boolean = false
 
-  onClickSubmit(data: any , contact: Contact) {
-    contact.vorname = data.firstname
-    contact.nachname = data.lastname
-    contact.email = data.emailaddress
-    contact.land = data.country
-    contact.adresse = data.streetaddress
-    contact.stadt = data.city
-    contact.plz = data.postalcode
-    contact.nachricht = data.nachricht
-
-    this.contactdata = { vorname: data.firstname, nachname: data.lastname, email: data.emailaddress, land: data.country, adresse: data.streetaddress, stadt: data.city, plz: data.postalcode, nachricht: data.nachricht }
-
+  onClickSubmit(contact: Contact) {
 
     if (contact.vorname.length > 0 && contact.nachname.length > 0 && contact.email.length > 0 && contact.nachricht.length > 0) {
 
-      //AN DATENBANK SENDEN
       this.message(contact)
-      this.anfragenStore = true
-
       this.eingabefehlt = false
       this.vornamefehlt = false
       this.nachnamefehlt = false
@@ -97,10 +80,6 @@ export class IndexComponent implements OnInit{
         this.nachrichtfehlt = true
       }
     }
-  }
-
-  ngOnInit(): void {
-  
   }
 
 }

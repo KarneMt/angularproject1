@@ -1,26 +1,17 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
-
-interface Contact {
-  vorname: string
-  nachname: string
-  email: string
-  land: string
-  adresse: string
-  stadt: string
-  plz: string
-  nachricht: string
-}
+import { Contact } from '../Model/model';
 
 @Component({
   selector: 'app-erfolgreich',
   templateUrl: './erfolgreich.component.html',
   styleUrls: ['./erfolgreich.component.css']
 })
+
 export class ErfolgreichComponent implements OnInit{
 
-  @Input() contact: Contact = { vorname: '', nachname: '', email: '', land: '', adresse: '', stadt: '', plz: '', nachricht: '' }
+  @Input() contact: Contact = { id:'', vorname: '', nachname: '', email: '', land: '', adresse: '', stadt: '', plz: '', nachricht: '' }
 
 
   constructor(private cookieService: CookieService, public route: Router) {
@@ -29,19 +20,7 @@ export class ErfolgreichComponent implements OnInit{
       this.route.navigate(['/login']);
     }
   }
-  /*constructor(private fb: FormBuilder) {
-    this.contactForm = this.fb.group({
-      vorname: [''],
-      nachname: [''],
-      email: [''],
-      land: [''],
-      adresse: [''],
-      stadt: [''],
-      plz: [''],
-      nachricht: ['']
-    })
-  }
-  */
+
 
   ngOnInit(): void {
   }
