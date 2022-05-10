@@ -10,7 +10,7 @@ export interface State {
 
 export const initialState: State = {
   count: 1,
-  contact: []
+  contact: [],
 };
 
 export const storeReducer = createReducer(
@@ -26,7 +26,7 @@ export const storeMReducer = createReducer(
   on(message, (state, action) => {
     return {
       ...state,
-      contact: action.contact,
+      contact: action.contact
     }
   }),
 );
