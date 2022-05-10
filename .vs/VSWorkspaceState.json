@@ -3,14 +3,14 @@
     "",
     "\\src",
     "\\src\\app",
-    "\\src\\app\\anfragen",
-    "\\src\\app\\erfolgreich",
-    "\\src\\app\\index",
+    "\\src\\app\\home",
     "\\src\\app\\login",
+    "\\src\\app\\menue",
     "\\src\\app\\Model",
+    "\\src\\app\\shared",
     "\\src\\app\\store",
     "\\src\\app\\store\\hydration"
   ],
-  "SelectedNode": "\\src\\app\\store\\store.actions.ts",
+  "SelectedNode": "\\src\\app\\store\\store.reducer.ts",
   "PreviewInSolutionExplorer": false
 }
