@@ -6,7 +6,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   templateUrl: './registrierung.component.html',
   styleUrls: ['./registrierung.component.css']
 })
-export class RegistrierungComponent implements OnInit {
+export class RegistrierungComponent {
   public loginForm: FormGroup = new FormGroup({
     firstname: new FormControl('', [
       Validators.required,
@@ -29,8 +29,5 @@ export class RegistrierungComponent implements OnInit {
   });
 
   constructor() { }
-
-  ngOnInit(): void {
-  }
 
 }
