@@ -29,7 +29,6 @@ import { RegistrierungComponent } from './registrierung/registrierung.component'
 import { UpdateComponent } from './update/update.component';
 import { ListComponent } from './list/list.component';
 
-
 const routes: Routes = [
   { path: "", component: HomeComponent },
   { path: "index", component: IndexComponent },

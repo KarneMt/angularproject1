@@ -41,9 +41,7 @@ export class AnfragenComponent {
     //this.contact$ = this.store.pipe(select(loadAnfragen));
     store.select('contact').subscribe((data: Contact[]) => {
       if (data) {
-        console.log(data)
         this.anfragen = Object.assign(data[0])
-        console.log(this.anfragen)
         if (this.anfragen) {
           this.show = true
           this.time = new Date().toISOString().slice(0, 16)

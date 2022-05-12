@@ -16,7 +16,12 @@ export class Logout implements Action {
 export const message = createAction('[Store Component] Message',
   props<{
     contact: Contact
-  }>()
-);
+  }>());
+
+export const deletemessage = createAction('[Store Component] Delete Message',
+  props<{
+    id: string
+  }>());
+
 
 

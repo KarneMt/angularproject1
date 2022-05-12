@@ -3,14 +3,15 @@
     "",
     "\\src",
     "\\src\\app",
-    "\\src\\app\\delete",
+    "\\src\\app\\anfragen",
     "\\src\\app\\erfolgreich",
     "\\src\\app\\home",
-    "\\src\\app\\index",
     "\\src\\app\\list",
-    "\\src\\app\\Model",
-    "\\src\\environments"
+    "\\src\\app\\login",
+    "\\src\\app\\store",
+    "\\src\\app\\store\\hydration",
+    "\\src\\app\\update"
   ],
-  "SelectedNode": "\\src\\app\\list\\list.component.html",
+  "SelectedNode": "\\src\\app\\list\\list.component.ts",
   "PreviewInSolutionExplorer": false
 }

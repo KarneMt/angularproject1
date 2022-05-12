@@ -1,5 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
-import { increment, decrement, reset, message } from './store.actions';
+import { increment, decrement, reset, message, deletemessage } from './store.actions';
 import { Contact } from "../Model/model";
 
 export interface State {
@@ -22,10 +22,14 @@ export const storeReducer = createReducer(
 export const storeMReducer = createReducer(
   initialState.contact,
 
-  on(message, (state, action) => 
+  on(message, (state, action) =>
 
     state.concat(action.contact)
   ),
-);
+
+  on(deletemessage, (state, action) => 
+    state.filter((item) => item.id !== action.id)
+  ),
+)
 
 
