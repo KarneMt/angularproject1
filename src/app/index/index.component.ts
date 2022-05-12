@@ -27,6 +27,7 @@ export class IndexComponent {
   message(contact: Contact) {
     let id: string = uuidv4();
     contact.id = id;
+    contact.datum = new Date;
     this.contactdata = contact
     this.anfragenStore = true
 

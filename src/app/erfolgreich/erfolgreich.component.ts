@@ -11,7 +11,7 @@ import { Contact } from '../Model/model';
 
 export class ErfolgreichComponent implements OnInit{
 
-  @Input() contact: Contact = { id:'', vorname: '', nachname: '', email: '', land: '', adresse: '', stadt: '', plz: '', nachricht: '' }
+  @Input() contact: Contact = { id: '', vorname: '', nachname: '', beschreibung: '', email: '', land: '', adresse: '', stadt: '', plz: '', nachricht: '', datum: new Date }
 
 
   constructor(private cookieService: CookieService, public route: Router) {

@@ -26,6 +26,8 @@ import { reducers, metaReducers } from '../app/store/hydration/';
 import { ActionTypes } from './store/store.actions';
 import { AnfragenComponent } from './anfragen/anfragen.component';
 import { RegistrierungComponent } from './registrierung/registrierung.component';
+import { UpdateComponent } from './update/update.component';
+import { ListComponent } from './list/list.component';
 
 
 const routes: Routes = [
@@ -38,6 +40,8 @@ const routes: Routes = [
   { path: "counter-test", component: CounterTestComponent },
   { path: "anfragen", component: AnfragenComponent },
   { path: "registrierung", component: RegistrierungComponent },
+  { path: "liste", component: ListComponent },
+  { path: "update", component: UpdateComponent },
 ];
 
 @NgModule({
@@ -55,7 +59,8 @@ const routes: Routes = [
     CounterTestComponent,
     AnfragenComponent,
     RegistrierungComponent,
-    
+    UpdateComponent,
+    ListComponent,
   ],
   imports: [
     BrowserModule,

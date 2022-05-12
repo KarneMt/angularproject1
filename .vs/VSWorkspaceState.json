@@ -1,7 +1,16 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\src",
+    "\\src\\app",
+    "\\src\\app\\delete",
+    "\\src\\app\\erfolgreich",
+    "\\src\\app\\home",
+    "\\src\\app\\index",
+    "\\src\\app\\list",
+    "\\src\\app\\Model",
+    "\\src\\environments"
   ],
-  "SelectedNode": "\\D:\\Kai Arne\\Desktop\\Angular",
+  "SelectedNode": "\\src\\app\\list\\list.component.html",
   "PreviewInSolutionExplorer": false
 }

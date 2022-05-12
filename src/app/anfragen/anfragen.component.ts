@@ -4,7 +4,7 @@ import { select, Store } from '@ngrx/store';
 import { CookieService } from 'ngx-cookie-service';
 import { empty, Subscriber } from 'rxjs';
 import { Observable } from 'rxjs';
-import { Contact} from '../Model/model';
+import { Contact } from '../Model/model';
 import { RootState } from '../store/hydration';
 import { loadAnfragen } from '../store/store.selectors';
 import * as pdfMake from 'pdfmake/build/pdfmake';
@@ -17,15 +17,15 @@ import { Content } from '@angular/compiler/src/render3/r3_ast';
   styleUrls: ['./anfragen.component.css']
 })
 
-export class AnfragenComponent implements OnInit {
+export class AnfragenComponent {
   private pdfM: any
   private pdfF: any
   page: number = 1
   public pdf = ''
 
-  anfragen: {contact : Contact} | undefined
+  anfragen: Contact  | undefined
   time: string | undefined
-  show :boolean = false
+  show: boolean = false
 
   constructor(private cookieService: CookieService, private store: Store<RootState>, public route: Router) {
     let value = this.cookieService.get('User-Cookie');
@@ -39,15 +39,16 @@ export class AnfragenComponent implements OnInit {
     //Beide funktionieren
     //this.contact$ = store.select(loadAnfragen); 
     //this.contact$ = this.store.pipe(select(loadAnfragen));
-    store.select('contact').subscribe((data:Contact[]) => {
+    store.select('contact').subscribe((data: Contact[]) => {
       if (data) {
-        this.anfragen = Object.assign(data)
+        console.log(data)
+        this.anfragen = Object.assign(data[0])
+        console.log(this.anfragen)
         if (this.anfragen) {
           this.show = true
           this.time = new Date().toISOString().slice(0, 16)
           this.time = this.time.replace("T", "-")
-          this.generateFile(this.anfragen.contact, this.time)
-
+          this.generateFile(this.anfragen, this.time)
         }
       }
     })
@@ -55,7 +56,7 @@ export class AnfragenComponent implements OnInit {
 
   pdfBericht() {
     var a = document.createElement('a');
-    a.download = this.time+'.pdf';
+    a.download = this.time + '.pdf';
     a.href = this.pdf;
     a.click();
 
@@ -64,7 +65,7 @@ export class AnfragenComponent implements OnInit {
   private prepare: any = {
   }
 
-  generateFile(daten : any, zeit : any) {
+  generateFile(daten: any, zeit: any) {
     this.pdfF = this.pdfM.createPdf(this.getDefinitions(this.prepare, daten, zeit))
     this.pdfF.getDataUrl((data: any) => {
       this.pdf = data
@@ -72,11 +73,7 @@ export class AnfragenComponent implements OnInit {
     })
   }
 
-
-  ngOnInit(): void {
-  }
-
-  getDefinitions(prepare: any, daten : any, zeit : any): any {
+  getDefinitions(prepare: any, daten: any, zeit: any): any {
     return {
       pageSize: 'A4',
       pageOrientation: 'p',
@@ -132,7 +129,7 @@ export class AnfragenComponent implements OnInit {
 
       // Content
       content: [
-        { text: 'Ihre Anfrage', style: 'header' ,margin: [100, 70, 100, 20]},
+        { text: 'Ihre Anfrage', style: 'header', margin: [100, 70, 100, 20] },
         {
           style: 'tableExample',
           color: '#444',
@@ -146,11 +143,12 @@ export class AnfragenComponent implements OnInit {
               [{ text: 'Nachname', style: 'tableHeader', alignment: 'center' }, { text: 'Vorname', style: 'tableHeader', alignment: 'center' }],
               [daten.vorname, daten.nachname],
               [{ text: 'Adresse', style: 'tableHeader', colSpan: 2, alignment: 'center' }, {}],
-              [{ colSpan: 1, rowSpan: 3, text: daten.adresse + '3\n' + daten.plz + ', ' + daten.stadt + '3\n' +  daten.land }, { text: 'E-Mail' , style: 'tableHeader', aligment: 'center'}],
-              [{}, {rowSpan: 2, text: daten.email}],
+              [{ colSpan: 1, rowSpan: 3, text: daten.adresse + '3\n' + daten.plz + ', ' + daten.stadt + '3\n' + daten.land }, { text: 'E-Mail', style: 'tableHeader', aligment: 'center' }],
+              [{}, { rowSpan: 2, text: daten.email }],
               [{}, {}],
               [{ text: 'Ihre Nachricht', style: 'tableHeader', colSpan: 2, alignment: 'center' }, {}],
-              [{ colSpan: 2, text: daten.nachricht}, {}],
+              [{ text: 'Beschreibung: ' + daten.beschreibung, colSpan: 2}, {}],
+              [{ colSpan: 2, text: daten.nachricht }, {}],
 
             ]
           }

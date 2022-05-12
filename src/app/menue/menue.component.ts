@@ -28,7 +28,6 @@ export class MenueComponent implements OnInit {
   loadIp() {
     this.httpClient.get('https://jsonip.com').subscribe(
       (value: any) => {
-        console.log(value);
         this.userIP = value.ip;
       },
       (error) => {

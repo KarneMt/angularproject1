@@ -1,7 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 import { increment, decrement, reset, message } from './store.actions';
 import { Contact } from "../Model/model";
-import { checkStateForEmptyArrays } from '../shared/helpfunctions';
 
 export interface State {
   count: number
@@ -23,10 +22,10 @@ export const storeReducer = createReducer(
 export const storeMReducer = createReducer(
   initialState.contact,
 
-  on(message, (state, action) => {
-    return {
-      ...state,
-      contact: action.contact
-    }
-  }),
+  on(message, (state, action) => 
+
+    state.concat(action.contact)
+  ),
 );
+
+
