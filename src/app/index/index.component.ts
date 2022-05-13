@@ -21,8 +21,7 @@ export class IndexComponent {
     let value = this.cookieService.get('User-Cookie');
     if (value.length <= 0) {
       this.route.navigate(['/login']);
-    }
-  }
+    }  }
 
   message(contact: Contact) {
     let id: string = uuidv4();
@@ -30,15 +29,11 @@ export class IndexComponent {
     contact.datum = new Date;
     this.contactdata = contact
     this.anfragenStore = true
-
-
-
-
     this.store.dispatch(message({ contact }));
     // TODO: Dispatch an increment action
   }
 
-  anfragenStore: boolean = false //Button für Storedaten, später löschen
+  anfragenStore: boolean = false 
   eingabefehlt: boolean = false
   vornamefehlt: boolean = false
   nachnamefehlt: boolean = false
@@ -81,6 +76,9 @@ export class IndexComponent {
         this.nachrichtfehlt = true
       }
     }
+  }
+  DetailsAnfrage(id: string) {
+    this.route.navigate(['/anfragen'], { queryParams: { 'id': id } })
   }
 
 }

@@ -26,11 +26,7 @@ export class HomeComponent {
     } else {
       this.usernameCookie = value
     }
-
     this.array = this.DatenbankWetterAbfragen()
-    console.log(this.array)
-
-
 }
 
   public arr: any[] = [

@@ -22,15 +22,17 @@ export class ListComponent {
     if (value.length <= 0) {
       this.route.navigate(['/login']);
     }
-
     store.select('contact').subscribe((saa) => {
       if (saa) {
         this.data = saa
         this.anfragenArray = this.data
       }
-      console.log(saa)
     })
 
+  }
+
+  DetailsAnfrage(id: string) {
+    this.route.navigate(['/anfragen'], { queryParams: { 'id': id } })
   }
 
   EntferneAnfrage(id: string) {

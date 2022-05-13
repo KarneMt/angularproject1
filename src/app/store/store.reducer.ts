@@ -1,5 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
-import { increment, decrement, reset, message, deletemessage } from './store.actions';
+import { increment, decrement, reset, message, deletemessage, updatemessage } from './store.actions';
 import { Contact } from "../Model/model";
 
 export interface State {
@@ -29,6 +29,17 @@ export const storeMReducer = createReducer(
 
   on(deletemessage, (state, action) => 
     state.filter((item) => item.id !== action.id)
+  ),
+
+
+  on(updatemessage, (state, action) => {
+    let l: Contact[]
+    l = state.filter((item) => item.id !== action.contact.id)
+    l.push(action.contact)
+    return [
+      ...l, 
+    ]
+  }
   ),
 )
 

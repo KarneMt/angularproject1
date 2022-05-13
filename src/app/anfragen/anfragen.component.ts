@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { select, Store } from '@ngrx/store';
 import { CookieService } from 'ngx-cookie-service';
 import { empty, Subscriber } from 'rxjs';
@@ -23,33 +23,41 @@ export class AnfragenComponent {
   page: number = 1
   public pdf = ''
 
-  anfragen: Contact  | undefined
+  anfragen: Contact | undefined
   time: string | undefined
   show: boolean = false
+  idString: any;
+  anfragenArray?: Contact[];
 
-  constructor(private cookieService: CookieService, private store: Store<RootState>, public route: Router) {
+  constructor(private cookieService: CookieService, private store: Store<RootState>, public router: Router, private route: ActivatedRoute) {
     let value = this.cookieService.get('User-Cookie');
     if (value.length <= 0) {
-      this.route.navigate(['/login']);
-    }
-    this.pdfM = pdfMake
+      this.router.navigate(['/login']);
+    } this.pdfM = pdfMake
     this.pdfM.vfs = pdfFonts.pdfMake.vfs
     this.page = 1
 
     //Beide funktionieren
     //this.contact$ = store.select(loadAnfragen); 
     //this.contact$ = this.store.pipe(select(loadAnfragen));
-    store.select('contact').subscribe((data: Contact[]) => {
-      if (data) {
-        this.anfragen = Object.assign(data[0])
-        if (this.anfragen) {
-          this.show = true
-          this.time = new Date().toISOString().slice(0, 16)
-          this.time = this.time.replace("T", "-")
-          this.generateFile(this.anfragen, this.time)
+    this.route.queryParams.subscribe(params => {
+      this.idString = params['id']
+      console.log(this.idString)
+
+      store.select('contact').subscribe((saa) => {
+        if (saa) {
+          this.anfragenArray = saa
         }
+      })
+      this.anfragenArray = this.anfragenArray?.filter((el: Contact) => el.id == this.idString!)
+      this.anfragen = Object.assign(this.anfragenArray![0])
+      if (this.anfragen) {
+        this.show = true
+        this.time = new Date().toISOString().slice(0, 16)
+        this.time = this.time.replace("T", "-")
+        this.generateFile(this.anfragen, this.time)
       }
-    })
+    });
   }
 
   pdfBericht() {
@@ -145,7 +153,7 @@ export class AnfragenComponent {
               [{}, { rowSpan: 2, text: daten.email }],
               [{}, {}],
               [{ text: 'Ihre Nachricht', style: 'tableHeader', colSpan: 2, alignment: 'center' }, {}],
-              [{ text: 'Beschreibung: ' + daten.beschreibung, colSpan: 2}, {}],
+              [{ text: 'Beschreibung: ' + daten.beschreibung, colSpan: 2 }, {}],
               [{ colSpan: 2, text: daten.nachricht }, {}],
 
             ]

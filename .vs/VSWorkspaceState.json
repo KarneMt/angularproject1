@@ -3,7 +3,6 @@
     "",
     "\\src",
     "\\src\\app",
-    "\\src\\app\\anfragen",
     "\\src\\app\\erfolgreich",
     "\\src\\app\\home",
     "\\src\\app\\list",
@@ -12,6 +11,6 @@
     "\\src\\app\\store\\hydration",
     "\\src\\app\\update"
   ],
-  "SelectedNode": "\\src\\app\\list\\list.component.ts",
+  "SelectedNode": "\\src\\app\\update\\update.component.ts",
   "PreviewInSolutionExplorer": false
 }

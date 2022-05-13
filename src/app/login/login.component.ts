@@ -30,12 +30,9 @@ export class LoginComponent {
   }
 
   anmelden(user: any) {
-    console.log(user)
     this.cookieService.deleteAll()
     this.cookieService.set('User-Cookie', user.username); //Cookie setzen
-
     window.location.reload();
-    this.route.navigate(['/']);
 
   }
 }

@@ -1,1 +1,96 @@
-<p>update works!</p>
+<!-- This example requires Tailwind CSS v2.0+ -->
+<div class="mt-10 sm:mt-0">
+  <div class="md:grid md:grid-cols-3 md:gap-6">
+    <div class="md:col-span-1">
+      <div class="px-4 sm:px-0">
+        <h1 class="text-lg font-medium leading-6 text-gray-900">Kontaktanfrage</h1>
+      </div>
+      <div *ngIf="eingabefehlt" role="alert">
+        <div class="bg-red-500 text-white font-bold rounded-t px-4 py-2">
+          Benötigte Eingaben fehlen
+        </div>
+        <div *ngIf="vornamefehlt" class="border border-t-0 border-red-400 rounded-b bg-red-100 px-4 py-3 text-red-700">
+          <p>Der Vorname fehlt</p>
+        </div>
+        <div *ngIf="nachnamefehlt" class="border border-t-0 border-red-400 rounded-b bg-red-100 px-4 py-3 text-red-700">
+          <p>Der Nachname fehlt</p>
+        </div>
+        <div *ngIf="emailfehlt" class="border border-t-0 border-red-400 rounded-b bg-red-100 px-4 py-3 text-red-700">
+          <p>Eine E-Mail Adresse fehlt</p>
+        </div>
+        <div *ngIf="nachrichtfehlt" class="border border-t-0 border-red-400 rounded-b bg-red-100 px-4 py-3 text-red-700">
+          <p>Eine Nachricht fehlt</p>
+        </div>
+      </div>
+
+      <!-- ngIf unterhalb austauschen, immer anzeigen wenn eine Kontaktanfrage im Store ist-->
+      <div *ngIf="anfragenStore">
+        <button [routerLink]="['/anfragen']" class="ml-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+          Ihre Anfrage
+        </button>
+      </div>
+
+
+      <div *ngIf="erfolgreich">
+        <app-erfolgreich [contact]="contactdata"></app-erfolgreich>
+      </div>
+    </div>
+    <div class="mt-5 md:mt-0 md:col-span-2">
+      <!-- template-driven form -->
+      <form action="#" #message="ngForm" (ngSubmit)="onClickSubmit(message.value)">
+        <div class="shadow overflow-hidden sm:rounded-md">
+          <div class="px-4 py-5 bg-white sm:p-6">
+            <div class="grid grid-cols-6 gap-6 form-group">
+              <div class="col-span-6 sm:col-span-3">
+                <label for="first-name" class="block text-sm font-medium text-gray-700">Vorname</label>
+                <input type="text" name="vorname" id="firstname" autocomplete="off" class="form-control mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" required [(ngModel)]="person.vorname">
+              </div>
+              <div class="col-span-6 sm:col-span-3">
+                <label for="last-name" class="block text-sm font-medium text-gray-700">Nachname</label>
+                <input type="text" name="nachname" id="lastname" autocomplete="off" class="form-control mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" required [(ngModel)]="person.nachname">
+              </div>
+              <div class="col-span-6 sm:col-span-4">
+                <label for="email-address" class="block text-sm font-medium text-gray-700">E-Mail Adresse</label>
+                <input type="text" name="email" id="emailaddress" autocomplete="off" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" required [(ngModel)]="person.email">
+              </div>
+              <div class="col-span-6 sm:col-span-3">
+                <label for="country" class="block text-sm font-medium text-gray-700">Land</label>
+                <select id="country" name="land" autocomplete="off" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" ngModel [(ngModel)]="person.land">
+                  <option>Deutschland</option>
+                  <option>Österreich</option>
+                  <option>Schweiz</option>
+                </select>
+              </div>
+              <div class="col-span-6">
+                <label for="street-address" class="block text-sm font-medium text-gray-700">Straße und Hausnummer</label>
+                <input type="text" name="adresse" id="streetaddress" autocomplete="off" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" [(ngModel)]="person.adresse">
+              </div>
+              <div class="col-span-6 sm:col-span-6 lg:col-span-2">
+                <label for="city" class="block text-sm font-medium text-gray-700">Stadt</label>
+                <input type="text" name="stadt" id="city" autocomplete="off" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" [(ngModel)]="person.stadt">
+              </div>
+              <div class="col-span-6 sm:col-span-3 lg:col-span-2">
+                <label for="postal-code" class="block text-sm font-medium text-gray-700">Postleitzahl</label>
+                <input type="text" name="plz" id="postalcode" autocomplete="off" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" [(ngModel)]="person.plz">
+              </div>
+              <br />
+              <div class="col-span-6 sm:col-span-3 lg:col-span-2">
+                <label for="beschreibung" class="block text-sm font-medium text-gray-700">Beschreibung</label>
+                <input type="text" name="beschreibung" id="beschreibung" autocomplete="off" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" [(ngModel)]="person.beschreibung">
+              </div>
+              <br />
+              <div class="col-span-6 sm:col-span-3 lg:col-span-2">
+                <label for="message" class="block text-sm font-medium text-gray-700">Ihre Nachricht</label>
+                <textarea cols="40" rows="20" type="text" maxlength="1000" name="nachricht" id="message" class="mt-1" required [(ngModel)]="person.nachricht"></textarea>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="!erfolgreich" class="px-4 py-3 bg-gray-50 text-right sm:px-6">
+            <button type="submit" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Änderungen Speichern</button>
+          </div>
+        </div>
+      </form>
+      <pre>{{ person | json }}</pre>
+    </div>
+  </div>
+</div>

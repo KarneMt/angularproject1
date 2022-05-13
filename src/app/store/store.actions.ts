@@ -23,5 +23,9 @@ export const deletemessage = createAction('[Store Component] Delete Message',
     id: string
   }>());
 
+export const updatemessage = createAction('[Store Component] Update Message',
+  props<{
+    contact: Contact
+  }>());
 
 

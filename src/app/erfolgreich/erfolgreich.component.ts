@@ -18,8 +18,7 @@ export class ErfolgreichComponent implements OnInit{
     let value = this.cookieService.get('User-Cookie');
     if (value.length <= 0) {
       this.route.navigate(['/login']);
-    }
-  }
+    }  }
 
 
   ngOnInit(): void {

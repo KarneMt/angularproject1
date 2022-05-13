@@ -17,8 +17,7 @@ export class CounterTestComponent implements OnInit {
     let value = this.cookieService.get('User-Cookie');
     if (value.length <= 0) {
       this.route.navigate(['/login']);
-    }
-    this.count$ = store.select('count');
+    }    this.count$ = store.select('count');
     // TODO: Connect `this.count$` stream to the current store `count` state
   }
 
