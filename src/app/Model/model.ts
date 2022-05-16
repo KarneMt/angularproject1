@@ -12,3 +12,14 @@ export interface Contact {
   nachricht: string
   datum: Date
 }
+
+export interface User {
+  id: string
+  vorname: string
+  nachname: string
+  adresse: string
+  stadt: string
+  email: string
+  plz: string
+  datum: Date
+}

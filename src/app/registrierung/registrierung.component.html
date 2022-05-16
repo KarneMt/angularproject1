@@ -6,13 +6,13 @@
       </div>
     </div>
     <div class="mt-5 md:mt-0 md:col-span-2">
-      <form [formGroup]="loginForm" action="#" method="POST">
+      <form [formGroup]="loginForm" action="#" method="POST" #user="ngForm" (ngSubmit)="KontoErstellen(user.value)">
         <div class="shadow overflow-hidden sm:rounded-md">
           <div class="px-4 py-5 bg-white sm:p-6">
             <div class="grid grid-cols-6 gap-6">
               <div class="col-span-6 sm:col-span-3">
                 <label for="first-name" class="block text-sm font-medium text-gray-700">Vorname</label>
-                <input formControlName="firstname" type="text" name="first-name" id="first-name" autocomplete="given-name" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                <input formControlName="firstname" type="text" name="first-name" id="firstname" autocomplete="given-name" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                 <div *ngIf="loginForm.controls['firstname'].dirty || loginForm.controls['firstname'].touched" class="error">
                   <p *ngIf="loginForm.controls['firstname'].errors">
                     Ein Vorname muss eingegeben werden.
@@ -23,7 +23,7 @@
 
               <div class="col-span-6 sm:col-span-3">
                 <label for="last-name" class="block text-sm font-medium text-gray-700">Nachname</label>
-                <input formControlName="lastname" type="text" name="last-name" id="last-name" autocomplete="family-name" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                <input formControlName="lastname" type="text" name="last-name" id="lastname" autocomplete="family-name" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                 <div *ngIf="loginForm.controls['lastname'].dirty || loginForm.controls['lastname'].touched" class="error">
                   <p *ngIf="loginForm.controls['lastname'].errors">
                     Ein Nachname muss eingegeben werden.
@@ -33,7 +33,7 @@
 
               <div class="col-span-6 sm:col-span-4">
                 <label for="email-address" class="block text-sm font-medium text-gray-700">E-Mail Adresse</label>
-                <input formControlName="mail" type="text" name="email-address" id="email-address" autocomplete="email" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                <input formControlName="mail" type="text" name="email-address" id="emailaddress" autocomplete="email" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                 <div *ngIf="loginForm.controls['mail'].dirty || loginForm.controls['mail'].touched" class="error">
                   <p *ngIf="loginForm.controls['mail'].errors">
                     Ein Nachname muss eingegeben werden.
@@ -43,7 +43,7 @@
 
               <div class="col-span-6">
                 <label for="street-address" class="block text-sm font-medium text-gray-700">Straße und Hausnummer</label>
-                <input formControlName="adresse" type="text" name="street-address" id="street-address" autocomplete="street-address" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                <input formControlName="adresse" type="text" name="street-address" id="streetaddress" autocomplete="street-address" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                 <div *ngIf="loginForm.controls['adresse'].dirty || loginForm.controls['adresse'].touched" class="error">
                   <p *ngIf="loginForm.controls['adresse'].errors">
                     Ein Nachname muss eingegeben werden.
@@ -63,7 +63,7 @@
 
               <div class="col-span-6 sm:col-span-3 lg:col-span-2">
                 <label for="postal-code" class="block text-sm font-medium text-gray-700">Postleitzahl</label>
-                <input formControlName="plz" type="text" name="postal-code" id="postal-code" autocomplete="postal-code" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                <input formControlName="plz" type="text" name="postal-code" id="postalcode" autocomplete="postal-code" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                 <div *ngIf="loginForm.controls['plz'].dirty || loginForm.controls['plz'].touched" class="error">
                   <p *ngIf="loginForm.controls['plz'].errors">
                     Ein Nachname muss eingegeben werden.

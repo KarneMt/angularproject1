@@ -3,14 +3,14 @@
     "",
     "\\src",
     "\\src\\app",
-    "\\src\\app\\erfolgreich",
-    "\\src\\app\\home",
-    "\\src\\app\\list",
-    "\\src\\app\\login",
-    "\\src\\app\\store",
-    "\\src\\app\\store\\hydration",
-    "\\src\\app\\update"
+    "\\src\\app\\anfragen",
+    "\\src\\app\\counter-test",
+    "\\src\\app\\logout",
+    "\\src\\app\\menue",
+    "\\src\\app\\navbar",
+    "\\src\\app\\registrierung",
+    "\\src\\app\\shared"
   ],
-  "SelectedNode": "\\src\\app\\update\\update.component.ts",
+  "SelectedNode": "\\package.json",
   "PreviewInSolutionExplorer": false
 }

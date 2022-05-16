@@ -49,6 +49,7 @@ export class AnfragenComponent {
           this.anfragenArray = saa
         }
       })
+      console.log(this.anfragenArray)
       this.anfragenArray = this.anfragenArray?.filter((el: Contact) => el.id == this.idString!)
       this.anfragen = Object.assign(this.anfragenArray![0])
       if (this.anfragen) {

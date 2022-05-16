@@ -1,0 +1,253 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "json-server",
+      "author": "typicode"
+    },
+    {
+      "id": 2,
+      "title": "json-server",
+      "author": "typicode"
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "user": [
+    {
+      "id": "81cefd9d-f0db-4287-9836-aed6e2837444",
+      "vorname": "Kai Arne",
+      "nachname": "Möbert",
+      "email": "kaiarnekai@gmail.com",
+      "adresse": "Schmarsauer Str. 31",
+      "stadt": "Dannenberg (Elbe)",
+      "plz": "29451",
+      "datum": "2022-05-16T16:56:42.789Z"
+    },
+    {
+      "id": "96e268f3-124d-4719-9b4a-da548a12c4c1",
+      "vorname": "Kai Arne",
+      "nachname": "Möbert",
+      "email": "kaiarnekai@gmail.com",
+      "adresse": "Schmarsauer Str. 31",
+      "stadt": "Dannenberg (Elbe)",
+      "plz": "29451",
+      "datum": "2022-05-16T16:56:44.926Z"
+    },
+    {
+      "id": "fd90301a-6eac-4677-8bcc-782982df2856",
+      "vorname": "Kai Arne",
+      "nachname": "Möbert",
+      "email": "kaiarnekai@gmail.com",
+      "adresse": "Schmarsauer Str. 31",
+      "stadt": "Dannenberg (Elbe)",
+      "plz": "29451",
+      "datum": "2022-05-16T16:57:03.481Z"
+    },
+    {
+      "id": "2d5a607a-4444-4a7e-b193-df8b200bcde5",
+      "vorname": "Kai Arnek",
+      "nachname": "Möbert",
+      "email": "kaiarnekai@gmail.com",
+      "adresse": "Schmarsauer Str. 31",
+      "stadt": "Dannenberg (Elbe)",
+      "plz": "29451",
+      "datum": "2022-05-16T16:57:11.804Z"
+    },
+    {
+      "id": "87082e3a-760c-464e-bb3a-cf58265716f2",
+      "vorname": "Kai Arne",
+      "nachname": "Möbert",
+      "email": "kaiarnekai@gmail.com",
+      "adresse": "Schmarsauer Str. 31",
+      "stadt": "Dannenberg (Elbe)",
+      "plz": "29451",
+      "datum": "2022-05-16T17:03:20.289Z"
+    },
+    {
+      "id": "0bf2d19d-6833-4a18-9d56-19f675d5b6e5",
+      "vorname": "Kai Arne",
+      "nachname": "Möbert",
+      "email": "kaiarnekai@gmail.com",
+      "adresse": "Schmarsauer Str. 31",
+      "stadt": "Dannenberg (Elbe)",
+      "plz": "29451",
+      "datum": "2022-05-16T17:03:37.665Z"
+    },
+    {
+      "id": "f06bc14b-069e-4ba8-9d94-37ea886a78be",
+      "vorname": "Kai Arne",
+      "nachname": "Möbert",
+      "email": "kaiarnekai@gmail.com",
+      "adresse": "Schmarsauer Str. 31",
+      "stadt": "Dannenberg (Elbe)",
+      "plz": "29451",
+      "datum": "2022-05-16T17:09:51.960Z"
+    },
+    {
+      "id": "6e6ef7be-b064-4cc1-b455-f2cd76ca96d3",
+      "vorname": "Kai Arne",
+      "nachname": "Möbert",
+      "email": "kaiarnekai@gmail.com",
+      "adresse": "Schmarsauer Str. 31",
+      "stadt": "Dannenberg (Elbe)",
+      "plz": "29451",
+      "datum": "2022-05-16T17:11:22.865Z"
+    },
+    {
+      "id": "7ee42dc5-2042-4892-8a3c-fa9721c78ab2",
+      "vorname": "Kai Arne",
+      "nachname": "Möbert",
+      "email": "kaiarnekai@gmail.com",
+      "adresse": "Schmarsauer Str. 31",
+      "stadt": "Dannenberg (Elbe)",
+      "plz": "29451",
+      "datum": "2022-05-16T17:11:49.317Z"
+    },
+    {
+      "id": "be970287-c447-47a6-aa90-25a1029b9ea2",
+      "vorname": "Kai Arnem",
+      "nachname": "Möbert",
+      "email": "kaiarnekai@gmail.com",
+      "adresse": "Friedenhorster Str. 11",
+      "stadt": "Berlin",
+      "plz": "10319",
+      "datum": "2022-05-16T17:11:58.607Z"
+    },
+    {
+      "id": "60c12710-d98e-43ea-a1b2-646fb006dd2b",
+      "vorname": "Kai Arne",
+      "nachname": "Möbert",
+      "email": "kaiarnekai@gmail.com",
+      "adresse": "Schmarsauer Str. 31",
+      "stadt": "Dannenberg (Elbe)",
+      "plz": "29451",
+      "datum": "2022-05-16T17:12:34.022Z"
+    },
+    {
+      "id": "3a29ff4b-2475-455c-bec0-0647366f81a8",
+      "vorname": "Kai Arne",
+      "nachname": "Möbert",
+      "email": "kaiarnekai@gmail.com",
+      "adresse": "Schmarsauer Str. 31",
+      "stadt": "Dannenberg (Elbe)",
+      "plz": "29451",
+      "datum": "2022-05-16T17:12:55.358Z"
+    },
+    {
+      "id": "232afde6-85f5-4712-8a3f-b16b32e69d6b",
+      "vorname": "Kai Arnek",
+      "nachname": "Möbert",
+      "email": "kaiarnekai@gmail.com",
+      "adresse": "Friedenhorster Str. 11",
+      "stadt": "Berlin",
+      "plz": "10319",
+      "datum": "2022-05-16T17:13:07.558Z"
+    },
+    {
+      "id": "23805e86-b738-4242-a671-af759831e2a4",
+      "vorname": "Kai Arnek",
+      "nachname": "Möbert",
+      "email": "kaiarnekai@gmail.com",
+      "adresse": "Friedenhorster Str. 11",
+      "stadt": "Berlin",
+      "plz": "10319",
+      "datum": "2022-05-16T17:13:36.363Z"
+    },
+    {
+      "id": "059293c1-9177-4674-8651-0ce4bb511e83",
+      "vorname": "Kai Arnek",
+      "nachname": "Möbert",
+      "email": "kaiarnekai@gmail.com",
+      "adresse": "Friedenhorster Str. 11",
+      "stadt": "Berlin",
+      "plz": "10319",
+      "datum": "2022-05-16T17:14:49.494Z"
+    },
+    {
+      "id": "2f0abd6c-4616-4097-932d-124c8a9de238",
+      "vorname": "Kai Arnek",
+      "nachname": "Möbert",
+      "email": "kaiarnekai@gmail.com",
+      "adresse": "Friedenhorster Str. 11",
+      "stadt": "Berlin",
+      "plz": "10319",
+      "datum": "2022-05-16T17:15:28.764Z"
+    },
+    {
+      "id": "fd126c3b-13ae-4b90-b48d-ad5b1f6edf96",
+      "vorname": "Kai Arnek",
+      "nachname": "Möbert",
+      "email": "kaiarnekai@gmail.com",
+      "adresse": "Friedenhorster Str. 11",
+      "stadt": "Berlin",
+      "plz": "10319",
+      "datum": "2022-05-16T17:16:05.805Z"
+    },
+    {
+      "id": "a013b68c-68cf-42a6-a457-3ff5fd4fdcd3",
+      "vorname": "Kai Arne",
+      "nachname": "Möbert",
+      "email": "kaiarnekai@gmail.com",
+      "adresse": "Friedenhorster Str. 11",
+      "stadt": "Berlin",
+      "plz": "10319",
+      "datum": "2022-05-16T17:21:59.668Z"
+    },
+    {
+      "id": "1329a945-334f-43f7-b806-3c186378c5d2",
+      "vorname": "Kai Arne",
+      "nachname": "Möbert",
+      "email": "kaiarnekai@gmail.com",
+      "adresse": "Friedenhorster Str. 11",
+      "stadt": "Berlin",
+      "plz": "10319",
+      "datum": "2022-05-16T17:22:53.462Z"
+    },
+    {
+      "id": "4cb64367-5f40-4762-b091-eab9071e2a82",
+      "vorname": "Kai Arne",
+      "nachname": "Möbert",
+      "email": "kaiarnekai@gmail.com",
+      "adresse": "Schmarsauer Str. 31",
+      "stadt": "Dannenberg (Elbe)",
+      "plz": "29451",
+      "datum": "2022-05-16T17:24:05.349Z"
+    },
+    {
+      "id": "d6dd094d-797d-4376-8f73-2bf40244c38d",
+      "vorname": "Kai Arne",
+      "nachname": "Möbert",
+      "email": "kaiarnekai@gmail.com",
+      "adresse": "Schmarsauer Str. 31",
+      "stadt": "Dannenberg (Elbe)",
+      "plz": "29451",
+      "datum": "2022-05-16T17:24:34.336Z"
+    },
+    {
+      "id": "783223e0-1d8b-4729-bf09-5680bac0a09d",
+      "vorname": "Kai Arnek",
+      "nachname": "Möbert",
+      "email": "kaiarnekai@gmail.com",
+      "adresse": "Friedenhorster Str. 11",
+      "stadt": "Berlin",
+      "plz": "10319",
+      "datum": "2022-05-16T17:25:40.481Z"
+    },
+    {
+      "id": "81f27a26-9ef6-42d6-a9a7-39bce2bd335b",
+      "vorname": "Kai Arnek",
+      "nachname": "Möbert",
+      "email": "kaiarnekai@gmail.com",
+      "adresse": "Friedenhorster Str. 11",
+      "stadt": "Berlin",
+      "plz": "10319",
+      "datum": "2022-05-16T17:27:03.141Z"
+    }
+  ]
+}
