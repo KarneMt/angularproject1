@@ -34,7 +34,6 @@
               "src/styles.css"
             ],
             "scripts": [
-              "json-server --watch db.json"
             ]
           },
           "configurations": {

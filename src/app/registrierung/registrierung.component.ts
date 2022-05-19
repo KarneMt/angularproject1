@@ -4,6 +4,8 @@ import { User } from '../Model/model';
 import { v4 as uuidv4 } from 'uuid';
 import { HttpClient } from '@angular/common/http';
 import { userDB } from '../../jsonServerConnection';
+import { Observable } from 'rxjs';
+import { waitForAsync } from '@angular/core/testing';
 
 @Component({
   selector: 'app-registrierung',
@@ -36,9 +38,12 @@ export class RegistrierungComponent {
   nutzer: User | undefined
   user: User | undefined
   mail: string = "kaiarnekai@gmail.com"
-  constructor(private httpClient: HttpClient) { }
+  b: any
+  in : any
 
-  KontoErstellen(user: any) {
+  constructor(private httpClient: HttpClient) {}
+
+  async KontoErstellen(user: any) {
 
 
     let uuid: string = uuidv4();
@@ -56,16 +61,22 @@ export class RegistrierungComponent {
 
 
     let value: string | undefined
-    let a: User[] = this.getUser(value)
+    value = "kaiarnekai@gmail.com"
+    let a: any = undefined
+
+    a = this.getUser(value)
+    
     console.log(a)
+    this.b = a
 
 
-    a.forEach((el: User) => {
-      console.log(el.email)
-      setTimeout(() => { console.log("World!"); }, 5000);
-    });
 
-   this.createTraveller(this.nutzer).subscribe(succes => alert("Done"), error => alert(error))
+
+
+
+
+
+    this.createTraveller(this.nutzer).subscribe(succes => alert("Done"), error => alert(error))
   }
 
   //POST
@@ -73,15 +84,22 @@ export class RegistrierungComponent {
     return this.httpClient.post(userDB, traveller);
   }
 
-
   //GET all oder mit value
-  getUser(value: string | undefined): any {
-    if (value == undefined) {
-      let ar: any = []
-      this.httpClient.get(userDB + "/").subscribe((data) => ar.push(data));
-      return ar
-    } else {
-      return this.httpClient.get(userDB + "/" + value).subscribe((data) => console.log(data));
-    }
+  getUser(value: string | undefined) : any {
+    let ar: any = []
+    let index : any
+    this.httpClient.get(userDB).forEach(function (item){
+      ar.push(item)
+    })
+
+    let lokal : any = ar.find((lokal: { vorname: any; }) => lokal.vorname === "Kai Arne");
+
+    console.log(lokal)
+
+    //ar.forEach(function (item: any) {
+    //  console.log(item)
+    //})
+    console.log(ar)
+    return ar
   }
 }

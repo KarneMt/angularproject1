@@ -3,14 +3,14 @@
     "",
     "\\src",
     "\\src\\app",
-    "\\src\\app\\anfragen",
-    "\\src\\app\\counter-test",
+    "\\src\\app\\home",
+    "\\src\\app\\index",
+    "\\src\\app\\list",
     "\\src\\app\\logout",
     "\\src\\app\\menue",
-    "\\src\\app\\navbar",
     "\\src\\app\\registrierung",
-    "\\src\\app\\shared"
+    "\\src\\app\\update"
   ],
-  "SelectedNode": "\\package.json",
+  "SelectedNode": "\\src\\app\\registrierung\\registrierung.component.ts",
   "PreviewInSolutionExplorer": false
 }

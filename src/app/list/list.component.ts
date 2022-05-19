@@ -28,7 +28,6 @@ export class ListComponent {
         this.anfragenArray = this.data
       }
     })
-
   }
 
   DetailsAnfrage(id: string) {
