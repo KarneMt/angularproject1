@@ -64,8 +64,8 @@ export class RegistrierungComponent {
     //this.zu$ = this.getUser(value)
     //console.log(this.zu$)
 
-    console.log(da)
-    da.forEach( (value: any) => {
+    console.log(daten)
+    daten.forEach( (value: any) => {
       if (value.email == mail) {
         this.exist = true
       }
@@ -101,19 +101,19 @@ export class RegistrierungComponent {
 
 
 var mail : string = ""
-export const da: any = getUser(mail)
+export const daten: any = getUser(mail)
 
 function getUser(value: string | undefined) : any {
-  let t: string = "?q=" + value
-  let dat: any = []
-  fetch(userDB+t)
+  let email: string = "?q=" + value
+  let daten: any = []
+  fetch(userDB+email)
     .then(res => res.json())
     .then(json => {
       json.map((data: { email: any; }) => {
-        dat.push(data)
+        daten.push(data)
         console.log(data)
       })
     })
-  console.log(dat)
-  return dat
+  console.log(daten)
+  return daten
 }
