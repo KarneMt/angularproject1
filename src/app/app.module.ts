@@ -28,6 +28,9 @@ import { AnfragenComponent } from './anfragen/anfragen.component';
 import { RegistrierungComponent } from './registrierung/registrierung.component';
 import { UpdateComponent } from './update/update.component';
 import { ListComponent } from './list/list.component';
+import "reflect-metadata"
+
+
 
 const routes: Routes = [
   { path: "", component: HomeComponent },

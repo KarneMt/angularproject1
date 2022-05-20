@@ -1,5 +1,12 @@
+import { Injectable } from '@angular/core';
 import { Action, createAction, props } from '@ngrx/store';
-import { Contact } from '../Model/model';
+import { catchError, map, Observable, of, switchMap } from 'rxjs';
+import { Contact, User } from '../Model/model';
+import { State } from './store.reducer';
+import { RegistrierungComponent } from '../registrierung/registrierung.component';
+import { Actions, Effect, ofType } from '@ngrx/effects';
+
+
 
 export const increment = createAction('[Store Component] Increment');
 export const decrement = createAction('[Store Component] Decrement');
@@ -27,5 +34,3 @@ export const updatemessage = createAction('[Store Component] Update Message',
   props<{
     contact: Contact
   }>());
-
-

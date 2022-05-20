@@ -4,6 +4,26 @@
       <div class="px-4 sm:px-0">
         <h3 class="text-lg font-medium leading-6 text-gray-900">Konto erstellen</h3>
       </div>
+      <div *ngIf="exist" role="alert">
+        <div class="bg-red-500 text-white font-bold rounded-t px-4 py-2">
+          Fehler - Konto konnte nicht erstellt werden
+        </div>
+        <div *ngIf="exist" class="border border-t-0 border-red-400 rounded-b bg-red-100 px-4 py-3 text-red-700">
+          <p>Ihre angegebene E-Mail adresse existiert bereits.</p>
+          <br>
+          <p>Verwenden Sie für ein neues Konto eine andere E-Mail Adresse.</p>
+        </div>
+      </div>
+
+      <div *ngIf="succes" role="alert">
+        <div class="bg-green-500 text-white font-bold rounded-t px-4 py-2">
+          Ihre Registrierung war erfolgreich
+        </div>
+        <div class="border border-t-0 border-green-300 rounded-b bg-green-100 px-4 py-3 text-black-900">
+          <p>E-Mail: {{this.nutzer!.email}}</p>
+        </div>
+      </div>
+
     </div>
     <div class="mt-5 md:mt-0 md:col-span-2">
       <form [formGroup]="loginForm" action="#" method="POST" #user="ngForm" (ngSubmit)="KontoErstellen(user.value)">
@@ -76,10 +96,12 @@
           <div class="px-4 py-3 bg-gray-50 text-right sm:px-6">
             <button [disabled]="!(loginForm.valid && (loginForm.dirty || loginForm.touched))" type="submit" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Konto erstellen</button>
           </div>
+
+
+
         </div>
       </form>
     </div>
-    <pre>{{ b | json }}</pre>
-    <pre>{{ in | json}}</pre>
+    <pre>{{ zu$ | json }}</pre>
   </div>
 

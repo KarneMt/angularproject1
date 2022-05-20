@@ -5,7 +5,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { HttpClient } from '@angular/common/http';
 import { userDB } from '../../jsonServerConnection';
 import { Observable } from 'rxjs';
-import { waitForAsync } from '@angular/core/testing';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-registrierung',
@@ -14,6 +14,7 @@ import { waitForAsync } from '@angular/core/testing';
 })
 
 export class RegistrierungComponent {
+
   public loginForm: FormGroup = new FormGroup({
     firstname: new FormControl('', [
       Validators.required,
@@ -35,17 +36,17 @@ export class RegistrierungComponent {
     ])
   });
 
-  nutzer: User | undefined
-  user: User | undefined
-  mail: string = "kaiarnekai@gmail.com"
-  b: any
-  in : any
+  first: boolean = true
+  exist: boolean = false
+  succes: boolean = false
+  nutzer!: User | undefined
+  zu$: Observable<User[]> | undefined
 
-  constructor(private httpClient: HttpClient) {}
+  constructor(private httpClient: HttpClient, public route: Router) { }
 
-  async KontoErstellen(user: any) {
-
-
+  KontoErstellen(user: any) {
+    this.succes = false
+    this.exist = false
     let uuid: string = uuidv4();
     this.nutzer = {
       id: uuid,
@@ -57,49 +58,62 @@ export class RegistrierungComponent {
       plz: user.plz,
       datum: new Date
     }
-    console.log(this.nutzer)
+    mail = this.nutzer.email
+    //let value: string | undefined
+    //value = "kaiarnekai@gmail.com"
+    //this.zu$ = this.getUser(value)
+    //console.log(this.zu$)
 
+    console.log(da)
+    da.forEach( (value: any) => {
+      if (value.email == mail) {
+        this.exist = true
+      }
+    });
 
-    let value: string | undefined
-    value = "kaiarnekai@gmail.com"
-    let a: any = undefined
-
-    a = this.getUser(value)
-    
-    console.log(a)
-    this.b = a
-
-
-
-
-
-
-
-
-    this.createTraveller(this.nutzer).subscribe(succes => alert("Done"), error => alert(error))
+    if (this.exist === false && this.first === true) {
+      this.createTraveller(this.nutzer).subscribe(succes => this.succes = true, error => alert(error))
+      this.first = false
+      setTimeout(() => { this.route.navigate(['/login']); }, 5000);
+    }
   }
 
   //POST
-  createTraveller(traveller: User) {
-    return this.httpClient.post(userDB, traveller);
+  createTraveller(user: User) {
+    return this.httpClient.post(userDB, user);
   }
 
-  //GET all oder mit value
+  //GET all oder mit value 
   getUser(value: string | undefined) : any {
-    let ar: any = []
-    let index : any
-    this.httpClient.get(userDB).forEach(function (item){
-      ar.push(item)
-    })
-
-    let lokal : any = ar.find((lokal: { vorname: any; }) => lokal.vorname === "Kai Arne");
-
-    console.log(lokal)
-
-    //ar.forEach(function (item: any) {
-    //  console.log(item)
-    //})
-    console.log(ar)
-    return ar
+    let t : string = "?q="+value
+    let dat: any = []
+    fetch(userDB+t)
+      .then(res => res.json())
+      .then(json => {
+        json.map((data: { email: any; }) => {
+          dat.push(data)
+        })
+      })
+    console.log(dat)
+    return dat
   }
+}
+
+
+var mail : string = ""
+export const da: any = getUser(mail)
+
+function getUser(value: string | undefined) : any {
+  let t: string = "?q=" + value
+  let dat: any = []
+  fetch(userDB+t)
+    .then(res => res.json())
+    .then(json => {
+      json.map((data: { email: any; }) => {
+        dat.push(data)
+        console.log(data)
+      })
+    })
+  console.log(dat)
+  return dat
 }

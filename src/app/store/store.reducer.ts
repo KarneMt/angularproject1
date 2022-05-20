@@ -1,6 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 import { increment, decrement, reset, message, deletemessage, updatemessage } from './store.actions';
-import { Contact } from "../Model/model";
+import { Contact, User } from "../Model/model";
 
 export interface State {
   count: number
@@ -10,6 +10,7 @@ export interface State {
 export const initialState: State = {
   count: 1,
   contact: [],
+
 };
 
 export const storeReducer = createReducer(
