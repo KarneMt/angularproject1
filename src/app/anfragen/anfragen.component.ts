@@ -6,7 +6,6 @@ import { empty, Subscriber } from 'rxjs';
 import { Observable } from 'rxjs';
 import { Contact } from '../Model/model';
 import { RootState } from '../store/hydration';
-import { loadAnfragen } from '../store/store.selectors';
 import * as pdfMake from 'pdfmake/build/pdfmake';
 import * as pdfFonts from "pdfmake/build/vfs_fonts";
 import { Content } from '@angular/compiler/src/render3/r3_ast';
@@ -46,7 +45,7 @@ export class AnfragenComponent {
 
       store.select('contact').subscribe((saa) => {
         if (saa) {
-          this.anfragenArray = saa
+          /*this.anfragenArray = saa*/
         }
       })
       console.log(this.anfragenArray)

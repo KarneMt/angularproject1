@@ -1,47 +1,56 @@
 import { createReducer, on } from '@ngrx/store';
-import { increment, decrement, reset, message, deletemessage, updatemessage } from './store.actions';
+import {deletemessage, updatemessage, createMessageSuccess, readMessageSuccess } from './store.actions';
 import { Contact, User } from "../Model/model";
 
-export interface State {
-  count: number
+export interface ContactState {
+
   contact: Contact[]
 }
 
-export const initialState: State = {
-  count: 1,
+export const initialState: ContactState = {
+
   contact: [],
 
 };
 
 export const storeReducer = createReducer(
-  initialState.count,
-  on(increment, (state) => state + 1),
-  on(decrement, (state) => state - 1),
-  on(reset, (state) => 1)
-);
+  initialState,
 
-export const storeMReducer = createReducer(
-  initialState.contact,
+  on(readMessageSuccess, (state, action) => {
+    console.log("on(readMessageSuccess")
 
-  on(message, (state, action) =>
+    return {
+      ...state,
+      todos: action.contact
+    }
+  }),
 
-    state.concat(action.contact)
-  ),
+  on(createMessageSuccess, (state, action) => {
+    console.log("on(createMessageSuccess")
+    let Contact: Contact = Object.assign({}, action.action.contact, { id: action.id })
+    let cleared: Contact[]  = state.contact
+    cleared = [...cleared!, ...[Contact]]
+    console.log(cleared)
+    return {
+      ...state,
+      contact: cleared
+    }
+  }),
 
-  on(deletemessage, (state, action) => 
-    state.filter((item) => item.id !== action.id)
-  ),
+  //on(deletemessage, (state, action) => 
+  //  state.filter((item) => item.id !== action.id)
+  //),
 
 
-  on(updatemessage, (state, action) => {
-    let l: Contact[]
-    l = state.filter((item) => item.id !== action.contact.id)
-    l.push(action.contact)
-    return [
-      ...l, 
-    ]
-  }
-  ),
+  //on(updatemessage, (state, action) => {
+  //  let l: Contact[]
+  //  l = state.filter((item) => item.id !== action.contact.id)
+  //  l.push(action.contact)
+  //  return [
+  //    ...l, 
+  //  ]
+  //}
+  //),
 )
 
 

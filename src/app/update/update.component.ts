@@ -30,7 +30,7 @@ export class UpdateComponent {
 
       store.select('contact').subscribe((saa) => {
         if (saa) {
-          this.anfragenArray = saa
+        //  this.anfragenArray = saa
         }
       })
       this.anfragenArray = this.anfragenArray?.filter((el: Contact) => el.id == this.idString!)

@@ -4,8 +4,11 @@ import { Store } from '@ngrx/store';
 import { CookieService } from 'ngx-cookie-service';
 import { Observable } from 'rxjs';
 import { Contact } from '../Model/model';
-import { message } from '../store/store.actions';
+import { createMessage, createMessageSuccess } from '../store/store.actions';
 import { v4 as uuidv4 } from 'uuid';
+import { ContactFacade } from '../store/store.facade'
+import { FormArray, FormGroup, FormBuilder } from '@angular/forms';
+import { orderBy } from '../shared/helpfunction'
 
 
 @Component({
@@ -14,26 +17,60 @@ import { v4 as uuidv4 } from 'uuid';
   styleUrls: ['./index.component.css']
 })
 
-export class IndexComponent {
+export class IndexComponent implements OnInit {
   contactdata: any = {}
+  cont: Contact[] = []
+  todoForm: FormGroup
+  todoArray: FormArray
 
-  constructor(private cookieService: CookieService, private store: Store<{ contact: Contact }>, public route: Router) {
+  constructor(private cookieService: CookieService, private _formBuilder: FormBuilder, private store: Store<{ contact: Contact }>, public route: Router, private messageFacade: ContactFacade) {
     let value = this.cookieService.get('User-Cookie');
     if (value.length <= 0) {
       this.route.navigate(['/login']);
-    }  }
+    }
 
-  message(contact: Contact) {
+    this.messageFacade.readMessages()
+    this.todoForm = this._formBuilder.group({
+      todo: this._formBuilder.array([
+
+      ]),
+    })
+    this.todoArray = <FormArray>this.todoForm.get('todo')
+
+  }
+  ngOnInit(): void {
+    this.messageFacade.Message$.pipe().subscribe((data: Contact[]) => {
+      this.cont = orderBy(data, 'data_create')
+      this.patch()
+    })
+  }
+
+  patch() {
+    this.todoArray.clear()
+    this.cont.forEach((el: any) => {
+      this.todoArray.push(el)
+    })
+  }
+
+
+
+
+
+  message(contact: Contact){
     let id: string = uuidv4();
     contact.id = id;
     contact.datum = new Date;
     this.contactdata = contact
     this.anfragenStore = true
-    this.store.dispatch(message({ contact }));
+    /*this.store.dispatch(message({ contact }));*/
+
+    const create: Contact = Object.assign({}, contact, { date_create: new Date(), date_update: new Date() })
+    this.messageFacade.createMessage(create)
+
     // TODO: Dispatch an increment action
   }
 
-  anfragenStore: boolean = false 
+  anfragenStore: boolean = false
   eingabefehlt: boolean = false
   vornamefehlt: boolean = false
   nachnamefehlt: boolean = false
@@ -81,4 +118,4 @@ export class IndexComponent {
     this.route.navigate(['/anfragen'], { queryParams: { 'id': id } })
   }
 
-}
+  }

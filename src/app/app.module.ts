@@ -19,7 +19,6 @@ import { CookieService } from 'ngx-cookie-service';
 import { LogoutComponent } from './logout/logout.component';
 import { MenueComponent } from './menue/menue.component';
 import { StoreModule } from '@ngrx/store';
-import { CounterTestComponent } from './counter-test/counter-test.component';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment'; // Angular CLI environment
 import { reducers, metaReducers } from '../app/store/hydration/';
@@ -28,8 +27,11 @@ import { AnfragenComponent } from './anfragen/anfragen.component';
 import { RegistrierungComponent } from './registrierung/registrierung.component';
 import { UpdateComponent } from './update/update.component';
 import { ListComponent } from './list/list.component';
-import "reflect-metadata"
-
+import { storeReducer } from './store/store.reducer';
+import { ContactEffects } from './store/store.effect';
+import { EffectsModule } from '@ngrx/effects';
+import { ContactService } from './store/store.service';
+import { ContactFacade } from './store/store.facade';
 
 
 const routes: Routes = [
@@ -39,7 +41,6 @@ const routes: Routes = [
   { path: "erfolreich", component: ErfolgreichComponent },
   { path: "login", component: LoginComponent },
   { path: "logout", component: LogoutComponent },
-  { path: "counter-test", component: CounterTestComponent },
   { path: "anfragen", component: AnfragenComponent },
   { path: "registrierung", component: RegistrierungComponent },
   { path: "liste", component: ListComponent },
@@ -58,7 +59,6 @@ const routes: Routes = [
     LoginComponent,
     LogoutComponent,
     MenueComponent,
-    CounterTestComponent,
     AnfragenComponent,
     RegistrierungComponent,
     UpdateComponent,
@@ -76,14 +76,16 @@ const routes: Routes = [
     ReactiveFormsModule,
     BrowserModule,
     StoreModule.forRoot(reducers, { metaReducers }),
+    EffectsModule.forRoot([ContactEffects]),
     StoreDevtoolsModule.instrument({
       maxAge: 25, // Retains last 25 states
       logOnly: false, // Restrict extension to log-only mode
       autoPause: true, // Pauses recording actions and state changes when the extension window is not open
     }),
-
   ],
-  providers: [CookieService],
+  exports: [
+  ],
+  providers: [CookieService, ContactFacade, ContactService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

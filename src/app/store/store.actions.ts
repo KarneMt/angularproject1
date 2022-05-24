@@ -1,16 +1,6 @@
-import { Injectable } from '@angular/core';
 import { Action, createAction, props } from '@ngrx/store';
-import { catchError, map, Observable, of, switchMap } from 'rxjs';
-import { Contact, User } from '../Model/model';
-import { State } from './store.reducer';
-import { RegistrierungComponent } from '../registrierung/registrierung.component';
-import { Actions, Effect, ofType } from '@ngrx/effects';
+import { Contact} from '../Model/model';
 
-
-
-export const increment = createAction('[Store Component] Increment');
-export const decrement = createAction('[Store Component] Decrement');
-export const reset = createAction('[Store Component] Reset');
 
 export class ActionTypes {
   static LOGOUT = "[App] logout";
@@ -20,7 +10,7 @@ export class Logout implements Action {
   readonly type = ActionTypes.LOGOUT;
 }
 
-export const message = createAction('[Store Component] Message',
+export const createMessage = createAction('[Store Component] Create Message',
   props<{
     contact: Contact
   }>());
@@ -34,3 +24,18 @@ export const updatemessage = createAction('[Store Component] Update Message',
   props<{
     contact: Contact
   }>());
+
+
+export const createMessageSuccess = createAction(
+  "[Edit Message Dialog] Message Insert Success",
+  props<{ action: { contact: Contact }, id: string }>()
+)
+
+export const readMessages = createAction(
+  "[Edit Message Dialog] Load Message"
+)
+
+export const readMessageSuccess = createAction(
+  "[Edit Message Dialog] Message Loaded",
+  props<{ contact: Contact[] }>()
+)

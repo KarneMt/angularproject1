@@ -1,9 +1,11 @@
-import { createFeatureSelector, createSelector, State } from "@ngrx/store";
+import { createFeatureSelector, createSelector } from "@ngrx/store";
+import { ContactState } from "./store.reducer"
 
+export const contactState = createFeatureSelector('reducers') //??
 
-export const loadAnfragen = createSelector(
-  createFeatureSelector('contact'),
+export const selectContact = createSelector(
+  contactState,
   (state: any) => {
     return state
   }
-);
+)

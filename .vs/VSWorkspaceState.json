@@ -1,14 +1,16 @@
 {
   "ExpandedNodes": [
     "",
-    "\\.angular",
     "\\src",
     "\\src\\app",
+    "\\src\\app\\index",
+    "\\src\\app\\list",
     "\\src\\app\\Model",
     "\\src\\app\\registrierung",
     "\\src\\app\\store",
-    "\\src\\app\\store\\Datenbank"
+    "\\src\\app\\store\\hydration",
+    "\\src\\app\\update"
   ],
-  "SelectedNode": "\\src\\app\\store\\Datenbank\\data-source.ts",
+  "SelectedNode": "\\src\\app\\index\\index.component.ts",
   "PreviewInSolutionExplorer": false
 }

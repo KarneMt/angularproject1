@@ -24,8 +24,8 @@ export class ListComponent {
     }
     store.select('contact').subscribe((saa) => {
       if (saa) {
-        this.data = saa
-        this.anfragenArray = this.data
+        //this.data = saa
+        //this.anfragenArray = this.data
       }
     })
   }
