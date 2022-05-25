@@ -5,6 +5,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { Contact } from '../Model/model';
 import { RootState } from '../store/hydration';
 import { updateMessage } from '../store/store.actions';
+import { ContactFacade } from '../store/store.facade';
 
 @Component({
   selector: 'app-update',
@@ -16,10 +17,11 @@ export class UpdateComponent {
   idString: string | undefined
   anfragenArray: Contact[] | undefined
   contactdata: any = {}
+  cont : Contact[] = []
 
   person: Contact
 
-  constructor(private route: ActivatedRoute, public router: Router, private cookieService: CookieService, private store: Store<RootState>) {
+  constructor(private route: ActivatedRoute, public router: Router, private cookieService: CookieService, private store: Store<RootState>, private messageFacade: ContactFacade) {
     let value = this.cookieService.get('User-Cookie');
     if (value.length <= 0) {
       this.router.navigate(['/login']);
@@ -28,12 +30,12 @@ export class UpdateComponent {
       this.idString = params['id']
       console.log(this.idString)
 
-      store.select('contact').subscribe((saa) => {
-        if (saa) {
-        //  this.anfragenArray = saa
-        }
+      this.messageFacade.Message$.pipe().subscribe((data: Contact[]) => {
+        this.cont = data
       })
-      this.anfragenArray = this.anfragenArray?.filter((el: Contact) => el.id == this.idString!)
+
+
+      this.anfragenArray = this.cont.filter((el: Contact) => el.id == this.idString!)
     }
     );
 
@@ -57,6 +59,10 @@ export class UpdateComponent {
     contact.id = this.anfragenArray![0].id
     this.contactdata = contact
     this.anfragenStore = true
+
+    const update: Contact = Object.assign({}, contact, { date_update: new Date() })
+    this.messageFacade.updateMessage(update)
+
   }
 
   anfragenStore: boolean = false
@@ -102,5 +108,8 @@ export class UpdateComponent {
         this.nachrichtfehlt = true
       }
     }
+  }
+  DetailsAnfrage(id: string) {
+    this.router.navigate(['/anfragen'], { queryParams: { 'id': id } })
   }
 }

@@ -25,10 +25,10 @@ export class ContactFacade {
 
     this.store.dispatch(MessageAction.createMessage({ contact }))
   }
-  updateTodo(update: Contact) {
+  updateMessage(update: Contact) {
     this.store.dispatch(MessageAction.updateMessage({ update }))
   }
-  deleteTodo(id: string) {
+  deleteMessage(id: string) {
     this.store.dispatch(MessageAction.deleteMessage({ id }))
   }
 }

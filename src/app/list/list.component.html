@@ -14,14 +14,14 @@
 
 
     <tr class="bg-gray-300 border border-grey-500 md:border-none block md:table-row" *ngFor="let item of cont;let indexOfelement=index;">
-      <td class="p-2 md:border md:border-grey-500 text-left block md:table-cell"><span class="inline-block w-1/3 md:hidden font-bold">Erstellt am</span>{{cont![indexOfelement].datum | date: 'dd.MM.yyyy HH:mm' }}</td>
-      <td class="p-2 md:border md:border-grey-500 text-left block md:table-cell"><span class="inline-block w-1/3 md:hidden font-bold">User Name</span>{{cont![indexOfelement].beschreibung}}</td>
-      <td class="p-2 md:border md:border-grey-500 text-left block md:table-cell"><span class="inline-block w-1/3 md:hidden font-bold">Email Address</span>{{cont![indexOfelement].nachricht}}</td>
+      <td class="p-2 md:border md:border-grey-500 text-left block md:table-cell"><span class="inline-block w-1/3 md:hidden font-bold">Erstellt am</span>{{cont[indexOfelement].datum | date: 'dd.MM.yyyy HH:mm' }}</td>
+      <td class="p-2 md:border md:border-grey-500 text-left block md:table-cell"><span class="inline-block w-1/3 md:hidden font-bold">Beschreibung</span>{{cont[indexOfelement].beschreibung}}</td>
+      <td class="p-2 md:border md:border-grey-500 text-left block md:table-cell"><span class="inline-block w-1/3 md:hidden font-bold">Nachricht</span>{{cont[indexOfelement].nachricht}}</td>
       <td class="p-2 md:border md:border-grey-500 text-left block md:table-cell">
-        <span class="inline-block w-1/3 md:hidden font-bold">Actions</span>
-        <button class="bg-lime-600 hover:bg-lime-700 text-white font-bold py-1 px-2 border border-lime-500 rounded" (click)="DetailsAnfrage(anfragenArray![indexOfelement].id)">Details</button>
-        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 border border-blue-500 rounded" (click)="UpdateAnfrage(anfragenArray![indexOfelement].id)">Edit</button>
-        <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 border border-red-500 rounded" (click)="EntferneAnfrage(anfragenArray![indexOfelement].id)">Löschen</button>
+        <span class="inline-block w-1/3 md:hidden font-bold">Aktionen</span>
+        <button class="bg-lime-600 hover:bg-lime-700 text-white font-bold py-1 px-2 border border-lime-500 rounded" (click)="DetailsAnfrage(cont[indexOfelement].id)">Details</button>
+        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 border border-blue-500 rounded" (click)="UpdateAnfrage(cont![indexOfelement].id)">Edit</button>
+        <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 border border-red-500 rounded" (click)="EntferneAnfrage(cont![indexOfelement].id)">Löschen</button>
       </td>
     </tr>
   </tbody>

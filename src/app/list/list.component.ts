@@ -32,28 +32,17 @@ export class ListComponent implements OnInit {
     if (value.length <= 0) {
       this.route.navigate(['/login']);
     }
-
     this.messageFacade.readMessages()
     this.todoForm = this._formBuilder.group({
       contact: this._formBuilder.array([
 
       ]),
     })
-    console.log(this.todoForm)
-
     this.todoArray = <FormArray>this.todoForm.get('contact')
-
-    console.log(this.cont)
-    console.log(this.todoArray)
-
-
   }
   ngOnInit(): void {
     this.messageFacade.Message$.pipe().subscribe((data: Contact[]) => {
-      console.log(data)
-      console.log(orderBy(data, 'datum'))
       this.cont = orderBy(data, 'datum')
-      console.log(this.cont)
       this.patch()
     })
   }
@@ -66,8 +55,6 @@ export class ListComponent implements OnInit {
   }
 
   patchElements(el: any) {
-    console.log("Check")
-
     return this._formBuilder.group({
       id: [el.id],
       datum: [el.datum],
@@ -88,7 +75,8 @@ export class ListComponent implements OnInit {
   }
 
   EntferneAnfrage(id: string) {
-    window.location.reload();
+    this.messageFacade.deleteMessage(id)
+   // window.location.reload();
   }
 
   UpdateAnfrage(id: string) {

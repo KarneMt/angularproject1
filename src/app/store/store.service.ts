@@ -30,7 +30,7 @@ export class ContactService {
       plz: "1031fhdhfdfhd9",
       beschreibung: "Test2",
       nachricht: "Test2-2",
-      id: "3a2d9b93-754d-4fce-9b37-156391f5af62",
+      id: "3a2d9b93-754d-4fce-9b37-156391f5af92",
       datum: "2022-05-18T13:34:16.036Z" }
   ]
 
@@ -38,7 +38,7 @@ export class ContactService {
     console.log("create")
 
     return new Observable((observer) => {
-      const source$ = of(Object.assign({}, item, { id: uuidv4() })) // this.reducer(reducer_func, kat)
+      const source$ = of(Object.assign({}, item /*{ id: uuidv4() }*/ )) // this.reducer(reducer_func, kat)
       source$.subscribe((data: any) => {
         observer.next(data.id)
       }), (error: any) => observer.error(error)
@@ -73,7 +73,6 @@ export class ContactService {
 
   createMessage(insert: Contact): Observable<string> {
     console.log(insert)
-    console.log("createMessage")
     return this.create(insert, 'insertContact')
   }
   readMessages(): Observable<any> {

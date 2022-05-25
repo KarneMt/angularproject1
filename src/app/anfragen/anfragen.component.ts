@@ -1,14 +1,13 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { select, Store } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { CookieService } from 'ngx-cookie-service';
-import { empty, Subscriber } from 'rxjs';
 import { Observable } from 'rxjs';
 import { Contact } from '../Model/model';
 import { RootState } from '../store/hydration';
 import * as pdfMake from 'pdfmake/build/pdfmake';
 import * as pdfFonts from "pdfmake/build/vfs_fonts";
-import { Content } from '@angular/compiler/src/render3/r3_ast';
+import { ContactFacade } from '../store/store.facade'
 
 @Component({
   selector: 'app-anfragen',
@@ -27,8 +26,9 @@ export class AnfragenComponent {
   show: boolean = false
   idString: any;
   anfragenArray?: Contact[];
+  cont: Contact[] = []
 
-  constructor(private cookieService: CookieService, private store: Store<RootState>, public router: Router, private route: ActivatedRoute) {
+  constructor(private cookieService: CookieService, private store: Store<RootState>, public router: Router, private route: ActivatedRoute, private messageFacade: ContactFacade) {
     let value = this.cookieService.get('User-Cookie');
     if (value.length <= 0) {
       this.router.navigate(['/login']);
@@ -36,20 +36,13 @@ export class AnfragenComponent {
     this.pdfM.vfs = pdfFonts.pdfMake.vfs
     this.page = 1
 
-    //Beide funktionieren
-    //this.contact$ = store.select(loadAnfragen); 
-    //this.contact$ = this.store.pipe(select(loadAnfragen));
     this.route.queryParams.subscribe(params => {
       this.idString = params['id']
       console.log(this.idString)
-
-      store.select('contact').subscribe((saa) => {
-        if (saa) {
-          /*this.anfragenArray = saa*/
-        }
+      this.messageFacade.Message$.pipe().subscribe((data: Contact[]) => {
+        this.cont = data
       })
-      console.log(this.anfragenArray)
-      this.anfragenArray = this.anfragenArray?.filter((el: Contact) => el.id == this.idString!)
+      this.anfragenArray = this.cont.filter((el: Contact) => el.id == this.idString!)
       this.anfragen = Object.assign(this.anfragenArray![0])
       if (this.anfragen) {
         this.show = true

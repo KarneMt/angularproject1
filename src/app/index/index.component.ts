@@ -35,15 +35,15 @@ export class IndexComponent implements OnInit {
 
   message(contact: Contact){
     let id: string = uuidv4();
+    console.log(id)
     contact.id = id;
     contact.datum = new Date;
     this.contactdata = contact
+    console.log(this.contactdata)
     this.anfragenStore = true
-    /*this.store.dispatch(message({ contact }));*/
 
     const create: Contact = Object.assign({}, contact, { date_create: new Date(), date_update: new Date() })
     this.messageFacade.createMessage(create)
-
     // TODO: Dispatch an increment action
   }
 
