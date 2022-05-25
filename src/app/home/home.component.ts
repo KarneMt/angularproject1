@@ -42,8 +42,6 @@ export class HomeComponent {
   }
 }
 
-
-
 function subscribe(arg0: any, arg1: void): any[] {
     throw new Error('Function not implemented.');
 }

@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { CookieService } from 'ngx-cookie-service';
-import { Observable } from 'rxjs';
 import { Contact } from '../Model/model';
 import { RootState } from '../store/hydration';
 import * as pdfMake from 'pdfmake/build/pdfmake';
@@ -58,7 +57,6 @@ export class AnfragenComponent {
     a.download = this.time + '.pdf';
     a.href = this.pdf;
     a.click();
-
   }
 
   private prepare: any = {

@@ -50,6 +50,5 @@ export class ContactEffects {
       })
     )
   })
-
   constructor(private actions$: Actions, private _contactService: ContactService) { }
 }

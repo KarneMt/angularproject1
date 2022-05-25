@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
-import { Store, createAction } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { Logout } from '../store/store.actions';
 
 @Component({

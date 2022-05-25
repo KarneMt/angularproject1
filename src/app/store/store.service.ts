@@ -1,6 +1,5 @@
 import { Injectable } from "@angular/core";
 import { Observable, of } from "rxjs";
-import { v4 as uuidv4 } from 'uuid';
 import { Contact } from '../Model/model'
 
 @Injectable({
@@ -44,6 +43,7 @@ export class ContactService {
       }), (error: any) => observer.error(error)
     })
   }
+
   read(reducer_func: string): Observable<any> {
     console.log("read")
     return new Observable((observer) => {
@@ -53,6 +53,7 @@ export class ContactService {
       }, (error: any) => observer.error(error))
     })
   }
+
   update(kat: any, reducer_func: string): Observable<number> {
     return new Observable((observer) => {
       const source$ = of(200) // this.reducer(reducer_func, kat)
@@ -62,6 +63,7 @@ export class ContactService {
         (error: any) => observer.error(error)
     })
   }
+
   delete(id: string, reducer_func: string): Observable<number> {
     return new Observable((observer) => {
       const source$ = of(200) // this.reducer(reducer_func, id)
@@ -75,14 +77,17 @@ export class ContactService {
     console.log(insert)
     return this.create(insert, 'insertContact')
   }
+
   readMessages(): Observable<any> {
     console.log("readMessage")
 
     return this.read('getMessage')
   }
+
   updateMessage(update: Contact): Observable<number> {
     return this.update(update, 'updateTodo')
   }
+
   deleteMessage(id: string): Observable<number> {
     return this.delete(id, 'deleteTodo')
   }

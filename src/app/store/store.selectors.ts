@@ -3,17 +3,7 @@ import { ContactState } from "./store.reducer"
 
 export const contactState = createFeatureSelector<ContactState>('contact-feature') //??
 
-//export const selectContact = createSelector(
-//  contactState,
-//  (state: any) => {
-//    return state
-//  }
-//)
-
-
-
 export const selectContact = createSelector(
   contactState,
   state => state.contact
-
 );

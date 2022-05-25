@@ -39,20 +39,6 @@ export const storeReducer = createReducer(
     }
   }),
 
-  //on(deletemessage, (state, action) => 
-  //  state.filter((item) => item.id !== action.id)
-  //),
-
-
-  //on(updatemessage, (state, action) => {
-  //  let l: Contact[]
-  //  l = state.filter((item) => item.id !== action.contact.id)
-  //  l.push(action.contact)
-  //  return [
-  //    ...l, 
-  //  ]
-  //}
-  //),
   on(updateMessageSuccess, (state, action) => {
     let cleared: Contact[] = [...state.contact!]
     cleared = cleared.filter(el => el.id != action.update.id)

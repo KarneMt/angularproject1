@@ -5,7 +5,6 @@ import { Contact } from "../Model/model"
 
 import * as MessageAction from './store.actions'
 import * as MessageSelectors from './store.selectors'
-import * as MessageState from './store.reducer'
 
 import { RootState } from './hydration/index'
 

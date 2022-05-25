@@ -1,14 +1,11 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { CookieService } from 'ngx-cookie-service';
-import { Observable } from 'rxjs';
 import { Contact } from '../Model/model';
-import { createMessage, createMessageSuccess } from '../store/store.actions';
 import { v4 as uuidv4 } from 'uuid';
 import { ContactFacade } from '../store/store.facade'
-import { FormArray, FormGroup, FormBuilder } from '@angular/forms';
-import { orderBy } from '../shared/helpfunction'
+import { FormBuilder } from '@angular/forms';
 
 
 @Component({
@@ -17,20 +14,14 @@ import { orderBy } from '../shared/helpfunction'
   styleUrls: ['./index.component.css']
 })
 
-export class IndexComponent implements OnInit {
+export class IndexComponent {
   contactdata: any = {}
-
 
   constructor(private cookieService: CookieService, private _formBuilder: FormBuilder, private store: Store<{ contact: Contact }>, public route: Router, private messageFacade: ContactFacade) {
     let value = this.cookieService.get('User-Cookie');
     if (value.length <= 0) {
       this.route.navigate(['/login']);
     }
-
-    
-
-  }
-  ngOnInit(): void {
   }
 
   message(contact: Contact){

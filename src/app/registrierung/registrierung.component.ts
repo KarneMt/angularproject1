@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { User } from '../Model/model';
 import { v4 as uuidv4 } from 'uuid';
@@ -98,7 +98,6 @@ export class RegistrierungComponent {
     return dat
   }
 }
-
 
 var mail : string = ""
 export const daten: any = getUser(mail)

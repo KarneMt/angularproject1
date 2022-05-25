@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Contact } from '../Model/model';
 
 @Component({
   selector: 'app-login',
@@ -9,6 +10,11 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
+
+  //todoForm: FormGroup
+  //todoArray: FormArray
+  cont: Contact[] = []
+
 
   public loginForm: FormGroup = new FormGroup({
     username: new FormControl('', [
@@ -18,7 +24,6 @@ export class LoginComponent {
       Validators.required
     ])
   });
-
 
   constructor(private cookieService: CookieService, public route: Router) {
     this.loginForm.valueChanges.subscribe(console.log)
@@ -33,6 +38,5 @@ export class LoginComponent {
     this.cookieService.deleteAll()
     this.cookieService.set('User-Cookie', user.username); //Cookie setzen
     window.location.reload();
-
   }
 }
