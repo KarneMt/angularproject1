@@ -19,9 +19,7 @@ import { orderBy } from '../shared/helpfunction'
 
 export class IndexComponent implements OnInit {
   contactdata: any = {}
-  cont: Contact[] = []
-  todoForm: FormGroup
-  todoArray: FormArray
+
 
   constructor(private cookieService: CookieService, private _formBuilder: FormBuilder, private store: Store<{ contact: Contact }>, public route: Router, private messageFacade: ContactFacade) {
     let value = this.cookieService.get('User-Cookie');
@@ -29,32 +27,11 @@ export class IndexComponent implements OnInit {
       this.route.navigate(['/login']);
     }
 
-    this.messageFacade.readMessages()
-    this.todoForm = this._formBuilder.group({
-      todo: this._formBuilder.array([
-
-      ]),
-    })
-    this.todoArray = <FormArray>this.todoForm.get('todo')
+    
 
   }
   ngOnInit(): void {
-    this.messageFacade.Message$.pipe().subscribe((data: Contact[]) => {
-      this.cont = orderBy(data, 'data_create')
-      this.patch()
-    })
   }
-
-  patch() {
-    this.todoArray.clear()
-    this.cont.forEach((el: any) => {
-      this.todoArray.push(el)
-    })
-  }
-
-
-
-
 
   message(contact: Contact){
     let id: string = uuidv4();

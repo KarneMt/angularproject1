@@ -9,25 +9,30 @@ import { Contact } from '../Model/model'
 export class ContactService {
   readMessage = [
     {
-      id: "3a2d9b93-754d-4fce-9b37-156391f5af62",
       vorname: "Kai Arnek",
       nachname: "Möbert",
       email: "kaiarnekai@gmail.com",
+      land: "Deutschland",
       adresse: "Friedenhorster Str. 11",
       stadt: "Berlin",
       plz: "10319",
+      beschreibung: "Test1",
+      nachricht: "Test1-2",
+      id: "3a2d9b93-754d-4fce-9b37-156391f5af62",
       datum: "2022-05-18T13:34:16.036Z" },
     {
-      id: "3a2d9b93-754d-4fce-9b37-156391f5af62",
       vorname: "Kafdhfdek",
       nachname: "Möbfdhhfdhfdert",
       email: "kaiarnekfdhfhdhfdai@gmail.com",
+      land: "Deutschland",
       adresse: "Friedenhfhdhffhdorster Str. 11",
       stadt: "Berfhdhfdlin",
       plz: "1031fhdhfdfhd9",
+      beschreibung: "Test2",
+      nachricht: "Test2-2",
+      id: "3a2d9b93-754d-4fce-9b37-156391f5af62",
       datum: "2022-05-18T13:34:16.036Z" }
   ]
-
 
   create(item: any, reducer_func: string): Observable<string> {
     console.log("create")
@@ -48,23 +53,23 @@ export class ContactService {
       }, (error: any) => observer.error(error))
     })
   }
-  //update(kat: any, reducer_func: string): Observable<number> {
-  //  return new Observable((observer) => {
-  //    const source$ = of(200) // this.reducer(reducer_func, kat)
-  //    source$.subscribe((status: any) => {
-  //      observer.next(status)
-  //    }),
-  //      (error: any) => observer.error(error)
-  //  })
-  //}
-  //delete(id: string, reducer_func: string): Observable<number> {
-  //  return new Observable((observer) => {
-  //    const source$ = of(200) // this.reducer(reducer_func, id)
-  //    source$.subscribe((status: any) => {
-  //      observer.next(status)
-  //    }), (error: any) => observer.error(error)
-  //  })
-  //}
+  update(kat: any, reducer_func: string): Observable<number> {
+    return new Observable((observer) => {
+      const source$ = of(200) // this.reducer(reducer_func, kat)
+      source$.subscribe((status: any) => {
+        observer.next(status)
+      }),
+        (error: any) => observer.error(error)
+    })
+  }
+  delete(id: string, reducer_func: string): Observable<number> {
+    return new Observable((observer) => {
+      const source$ = of(200) // this.reducer(reducer_func, id)
+      source$.subscribe((status: any) => {
+        observer.next(status)
+      }), (error: any) => observer.error(error)
+    })
+  }
 
   createMessage(insert: Contact): Observable<string> {
     console.log(insert)
@@ -76,10 +81,10 @@ export class ContactService {
 
     return this.read('getMessage')
   }
-  //updateTodo(update: Todo): Observable<number> {
-  //  return this.update(update, 'updateTodo')
-  //}
-  //deleteTodo(id: string): Observable<number> {
-  //  return this.delete(id, 'deleteTodo')
-  //}
+  updateMessage(update: Contact): Observable<number> {
+    return this.update(update, 'updateTodo')
+  }
+  deleteMessage(id: string): Observable<number> {
+    return this.delete(id, 'deleteTodo')
+  }
 }

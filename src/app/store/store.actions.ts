@@ -15,15 +15,15 @@ export const createMessage = createAction('[Store Component] Create Message',
     contact: Contact
   }>());
 
-export const deletemessage = createAction('[Store Component] Delete Message',
-  props<{
-    id: string
-  }>());
+//export const deletemessage = createAction('[Store Component] Delete Message',
+//  props<{
+//    id: string
+//  }>());
 
-export const updatemessage = createAction('[Store Component] Update Message',
-  props<{
-    contact: Contact
-  }>());
+//export const updatemessage = createAction('[Store Component] Update Message',
+//  props<{
+//    contact: Contact
+//  }>());
 
 
 export const createMessageSuccess = createAction(
@@ -38,4 +38,21 @@ export const readMessages = createAction(
 export const readMessageSuccess = createAction(
   "[Edit Message Dialog] Message Loaded",
   props<{ contact: Contact[] }>()
+)
+
+export const updateMessage = createAction(
+  "[Edit Todo Dialog] Todo Updates",
+  props<{ update: Contact }>()
+)
+export const updateMessageSuccess = createAction(
+  "[Edit Todo Dialog] Todo Updates Success",
+  props<{ update: Contact }>()
+)
+export const deleteMessage = createAction(
+  "[Edit Todo Dialog] Todo Delete",
+  props<{ id: string }>()
+)
+export const deleteMessageSuccess = createAction(
+  "[Edit Todo Dialog] Todo Delete Success",
+  props<{ id: string }>()
 )

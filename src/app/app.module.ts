@@ -32,6 +32,8 @@ import { ContactEffects } from './store/store.effect';
 import { EffectsModule } from '@ngrx/effects';
 import { ContactService } from './store/store.service';
 import { ContactFacade } from './store/store.facade';
+import { CommonModule } from '@angular/common';
+
 
 
 const routes: Routes = [
@@ -64,7 +66,9 @@ const routes: Routes = [
     UpdateComponent,
     ListComponent,
   ],
+
   imports: [
+    CommonModule,
     BrowserModule,
     RouterModule.forRoot(routes),
     BrowserAnimationsModule,
@@ -75,7 +79,12 @@ const routes: Routes = [
     HttpClientModule,
     ReactiveFormsModule,
     BrowserModule,
-    StoreModule.forRoot(reducers, { metaReducers }),
+    StoreModule.forFeature('contact-feature', storeReducer),
+    StoreModule.forRoot(reducers,{
+      metaReducers,
+      runtimeChecks: {
+        strictStateImmutability: true
+      } }),
     EffectsModule.forRoot([ContactEffects]),
     StoreDevtoolsModule.instrument({
       maxAge: 25, // Retains last 25 states
@@ -84,6 +93,7 @@ const routes: Routes = [
     }),
   ],
   exports: [
+    IndexComponent
   ],
   providers: [CookieService, ContactFacade, ContactService],
   bootstrap: [AppComponent]

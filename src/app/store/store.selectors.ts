@@ -1,11 +1,19 @@
 import { createFeatureSelector, createSelector } from "@ngrx/store";
 import { ContactState } from "./store.reducer"
 
-export const contactState = createFeatureSelector('reducers') //??
+export const contactState = createFeatureSelector<ContactState>('contact-feature') //??
+
+//export const selectContact = createSelector(
+//  contactState,
+//  (state: any) => {
+//    return state
+//  }
+//)
+
+
 
 export const selectContact = createSelector(
   contactState,
-  (state: any) => {
-    return state
-  }
-)
+  state => state.contact
+
+);

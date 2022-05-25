@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 import { CookieService } from 'ngx-cookie-service';
 import { Contact } from '../Model/model';
 import { RootState } from '../store/hydration';
-import { updatemessage } from '../store/store.actions';
+import { updateMessage } from '../store/store.actions';
 
 @Component({
   selector: 'app-update',
@@ -57,7 +57,6 @@ export class UpdateComponent {
     contact.id = this.anfragenArray![0].id
     this.contactdata = contact
     this.anfragenStore = true
-    this.store.dispatch(updatemessage({ contact }));
   }
 
   anfragenStore: boolean = false
