@@ -84,25 +84,27 @@ export class RegistrierungComponent {
   }
 
   //GET all oder mit value 
-  getUser(value: string | undefined) : any {
-    let t : string = "?q="+value
-    let dat: any = []
-    fetch(userDB+t)
-      .then(res => res.json())
-      .then(json => {
-        json.map((data: { email: any; }) => {
-          dat.push(data)
-        })
-      })
-    console.log(dat)
-    return dat
+//  getUser(value: string | undefined): any {
+
+//    let t : string = "?q="+value
+//    let dat: any = []
+//    fetch(userDB+t)
+//      .then(res => res.json())
+//      .then(json => {
+//        json.map((data: { email: any; }) => {
+//          dat.push(data)
+//        })
+//      })
+//    console.log(dat)
+//    return dat
+//  }
   }
-}
 
 var mail : string = ""
 export const daten: any = getUser(mail)
 
-function getUser(value: string | undefined) : any {
+//GET all oder mit value 
+function getUser(value: string | undefined): any {
   let email: string = "?q=" + value
   let daten: any = []
   fetch(userDB+email)
@@ -113,6 +115,5 @@ function getUser(value: string | undefined) : any {
         console.log(data)
       })
     })
-  console.log(daten)
   return daten
 }

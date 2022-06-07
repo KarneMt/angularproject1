@@ -1,41 +1,16 @@
 import { Injectable } from "@angular/core";
 import { Observable, of } from "rxjs";
 import { Contact } from '../Model/model'
+import { daten } from './store.Datenbank'
 
 @Injectable({
   providedIn: 'root'
 })
 export class ContactService {
-  readMessage = [
-    {
-      vorname: "Kai Arnek",
-      nachname: "Möbert",
-      email: "kaiarnekai@gmail.com",
-      land: "Deutschland",
-      adresse: "Friedenhorster Str. 11",
-      stadt: "Berlin",
-      plz: "10319",
-      beschreibung: "Test1",
-      nachricht: "Test1-2",
-      id: "3a2d9b93-754d-4fce-9b37-156391f5af62",
-      datum: "2022-05-18T13:34:16.036Z" },
-    {
-      vorname: "Kafdhfdek",
-      nachname: "Möbfdhhfdhfdert",
-      email: "kaiarnekfdhfhdhfdai@gmail.com",
-      land: "Deutschland",
-      adresse: "Friedenhfhdhffhdorster Str. 11",
-      stadt: "Berfhdhfdlin",
-      plz: "1031fhdhfdfhd9",
-      beschreibung: "Test2",
-      nachricht: "Test2-2",
-      id: "3a2d9b93-754d-4fce-9b37-156391f5af92",
-      datum: "2022-05-18T13:34:16.036Z" }
-  ]
+
 
   create(item: any, reducer_func: string): Observable<string> {
     console.log("create")
-
     return new Observable((observer) => {
       const source$ = of(Object.assign({}, item /*{ id: uuidv4() }*/ )) // this.reducer(reducer_func, kat)
       source$.subscribe((data: any) => {
@@ -47,7 +22,7 @@ export class ContactService {
   read(reducer_func: string): Observable<any> {
     console.log("read")
     return new Observable((observer) => {
-      const source$ = of(this.readMessage) // this.getReducer(reducer_func, {})
+      const source$ = of(daten) // this.getReducer(reducer_func, {})
       source$.subscribe((data: any) => {
         observer.next(data)
       }, (error: any) => observer.error(error))
@@ -80,7 +55,6 @@ export class ContactService {
 
   readMessages(): Observable<any> {
     console.log("readMessage")
-
     return this.read('getMessage')
   }
 

@@ -35,7 +35,6 @@ import { ContactFacade } from './store/store.facade';
 import { CommonModule } from '@angular/common';
 
 
-
 const routes: Routes = [
   { path: "", component: HomeComponent },
   { path: "index", component: IndexComponent },
