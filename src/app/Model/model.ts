@@ -22,4 +22,6 @@ export interface User {
   email: string
   plz: string
   datum: Date
+  lastUpdate: Date
+  password : string
 }

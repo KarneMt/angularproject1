@@ -5,7 +5,6 @@ import { Contact } from "../Model/model"
 
 import * as MessageAction from './store.actions'
 import * as MessageSelectors from './store.selectors'
-
 import { RootState } from './hydration/index'
 
 @Injectable()
@@ -15,13 +14,11 @@ export class ContactFacade {
   constructor(private store: Store<RootState>) { }
 
   readMessages() {
-    console.log("ReadMessage")
-
+    //console.log("ReadMessage")
     this.store.dispatch(MessageAction.readMessages())
   }
   createMessage(contact: Contact) {
-    console.log("CreateMessage")
-
+    //console.log("CreateMessage")
     this.store.dispatch(MessageAction.createMessage({ contact }))
   }
   updateMessage(update: Contact) {

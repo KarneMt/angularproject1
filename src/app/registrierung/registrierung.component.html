@@ -4,7 +4,7 @@
       <div class="px-4 sm:px-0">
         <h3 class="text-lg font-medium leading-6 text-gray-900">Konto erstellen</h3>
       </div>
-      <div *ngIf="exist" role="alert">
+      <div *ngIf="error" role="alert">
         <div class="bg-red-500 text-white font-bold rounded-t px-4 py-2">
           Fehler - Konto konnte nicht erstellt werden
         </div>
@@ -12,6 +12,16 @@
           <p>Ihre angegebene E-Mail adresse existiert bereits.</p>
           <br>
           <p>Verwenden Sie für ein neues Konto eine andere E-Mail Adresse.</p>
+        </div>
+        <div *ngIf="!checkmail" class="border border-t-0 border-red-400 rounded-b bg-red-100 px-4 py-3 text-red-700">
+          <p>Ihre angegebenen E-Mail Adressen stimmen nicht miteinander überein.</p>
+          <br>
+          <p>Geben Sie ihre E-Mail Adressen nochmal ein.</p>
+        </div>
+        <div *ngIf="!checkpassword" class="border border-t-0 border-red-400 rounded-b bg-red-100 px-4 py-3 text-red-700">
+          <p>Ihre angegebenen Passwörter stimmen nicht miteinander überein.</p>
+          <br>
+          <p>Geben Sie ihre Passwörter nochmal ein.</p>
         </div>
       </div>
 
@@ -56,7 +66,17 @@
                 <input formControlName="mail" type="text" name="email-address" id="emailaddress" autocomplete="email" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                 <div *ngIf="loginForm.controls['mail'].dirty || loginForm.controls['mail'].touched" class="error">
                   <p *ngIf="loginForm.controls['mail'].errors">
-                    Ein Nachname muss eingegeben werden.
+                    Eine E-Mail muss eingegeben werden.
+                  </p>
+                </div>
+              </div>
+
+              <div class="col-span-6 sm:col-span-4">
+                <label for="second-email-address" class="block text-sm font-medium text-gray-700">Bitte Wiederholen Sie ihre E-Mail Adresse</label>
+                <input formControlName="smail" type="text" name="email-address" id="emailaddress" autocomplete="email" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                <div *ngIf="loginForm.controls['smail'].dirty || loginForm.controls['smail'].touched" class="error">
+                  <p *ngIf="loginForm.controls['smail'].errors">
+                    Bitte geben Sie ihre E-Mail zu Kontrolle nochmal ein.
                   </p>
                 </div>
               </div>
@@ -66,7 +86,7 @@
                 <input formControlName="adresse" type="text" name="street-address" id="streetaddress" autocomplete="street-address" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                 <div *ngIf="loginForm.controls['adresse'].dirty || loginForm.controls['adresse'].touched" class="error">
                   <p *ngIf="loginForm.controls['adresse'].errors">
-                    Ein Nachname muss eingegeben werden.
+                    Eine Straße und Hausnummer muss eingegeben werden.
                   </p>
                 </div>
               </div>
@@ -76,7 +96,7 @@
                 <input formControlName="city" type="text" name="city" id="city" autocomplete="address-level2" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                 <div *ngIf="loginForm.controls['city'].dirty || loginForm.controls['city'].touched" class="error">
                   <p *ngIf="loginForm.controls['city'].errors">
-                    Ein Nachname muss eingegeben werden.
+                    Eine Stadt muss eingegeben werden.
                   </p>
                 </div>
               </div>
@@ -86,7 +106,27 @@
                 <input formControlName="plz" type="text" name="postal-code" id="postalcode" autocomplete="postal-code" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                 <div *ngIf="loginForm.controls['plz'].dirty || loginForm.controls['plz'].touched" class="error">
                   <p *ngIf="loginForm.controls['plz'].errors">
-                    Ein Nachname muss eingegeben werden.
+                    Eine Postleitzahl muss eingegeben werden.
+                  </p>
+                </div>
+              </div>
+
+              <div class="col-span-6 sm:col-span-3 lg:col-span-2">
+                <label for="password" class="block text-sm font-medium text-gray-700">Passwort</label>
+                <input formControlName="pwd" type="text" name="password" id="password" autocomplete="password" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                <div *ngIf="loginForm.controls['pwd'].dirty || loginForm.controls['pwd'].touched" class="error">
+                  <p *ngIf="loginForm.controls['pwd'].errors">
+                    Ein Passwort muss eingegeben werden.
+                  </p>
+                </div>
+              </div>
+
+              <div class="col-span-6 sm:col-span-3 lg:col-span-2">
+                <label for="second-password" class="block text-sm font-medium text-gray-700">Bitte Wiederholen Sie ihr Passwort</label>
+                <input formControlName="spwd" type="text" name="password" id="password" autocomplete="postal-code" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                <div *ngIf="loginForm.controls['spwd'].dirty || loginForm.controls['spwd'].touched" class="error">
+                  <p *ngIf="loginForm.controls['spwd'].errors">
+                    Bitte geben Sie ihr Passwort zu Kontrolle nochmal ein.
                   </p>
                 </div>
               </div>
@@ -96,12 +136,9 @@
           <div class="px-4 py-3 bg-gray-50 text-right sm:px-6">
             <button [disabled]="!(loginForm.valid && (loginForm.dirty || loginForm.touched))" type="submit" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Konto erstellen</button>
           </div>
-
-
-
         </div>
       </form>
     </div>
     <pre>{{ zu$ | json }}</pre>
   </div>
-
+</div>

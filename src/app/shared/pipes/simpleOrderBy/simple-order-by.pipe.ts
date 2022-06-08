@@ -8,15 +8,15 @@ export class SimpleOrderByPipe implements PipeTransform {
     let result = [...input]
     if (order == 'ASC') {
       result.sort((a, b) => {
-        console.log(`vergleich: ${a.group},${a.value} - ${b.group},${b.value}`)
+        //console.log(`vergleich: ${a.group},${a.value} - ${b.group},${b.value}`)
         switch (true) {
           case a[property[0]] < b[property[0]]:
-            console.log('a>b')
+            //console.log('a>b')
             return -1
             break
 
           case a[property[0]] > b[property[0]]:
-            console.log('a<b')
+            //console.log('a<b')
             return 0
 
           // case a[property[0]] = b[property[0]]:
@@ -24,7 +24,7 @@ export class SimpleOrderByPipe implements PipeTransform {
           //   break
           
           default:
-            console.log('gleich')
+            //console.log('gleich')
             if (order == 'ASC') {
               return (a[property[1]] < b[property[1]] ? -1 : 1)
             } else {
@@ -36,15 +36,15 @@ export class SimpleOrderByPipe implements PipeTransform {
     } else {
       // DESC
       result.sort((a, b) => {
-        console.log(`vergleich: ${a.group},${a.value} - ${b.group},${b.value}`)
+        //console.log(`vergleich: ${a.group},${a.value} - ${b.group},${b.value}`)
         switch (true) {
           case a[property[0]] > b[property[0]]:
-            console.log('a>b')
+            //console.log('a>b')
             return -1
             break
 
           case a[property[0]] < b[property[0]]:
-            console.log('a<b')
+            //console.log('a<b')
             return 0
 
           // case a[property[0]] = b[property[0]]:
@@ -52,7 +52,7 @@ export class SimpleOrderByPipe implements PipeTransform {
           //   break
           
           default:
-            console.log('gleich')
+            //console.log('gleich')
             if (order == 'ASC') {
               return (a[property[1]] < b[property[1]] ? -1 : 1)
             } else {

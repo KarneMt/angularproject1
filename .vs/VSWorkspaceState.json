@@ -3,14 +3,14 @@
     "",
     "\\src",
     "\\src\\app",
-    "\\src\\app\\index",
-    "\\src\\app\\list",
+    "\\src\\app\\anfragen",
+    "\\src\\app\\login",
     "\\src\\app\\Model",
-    "\\src\\app\\registrierung",
+    "\\src\\app\\navbar",
+    "\\src\\app\\shared",
     "\\src\\app\\store",
-    "\\src\\app\\store\\hydration",
-    "\\src\\app\\update"
+    "\\src\\app\\store\\hydration"
   ],
-  "SelectedNode": "\\src\\app\\index\\index.component.ts",
+  "SelectedNode": "\\src\\app\\store\\store.Datenbank.ts",
   "PreviewInSolutionExplorer": false
 }

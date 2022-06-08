@@ -3,22 +3,18 @@ import { createMessageSuccess, readMessageSuccess, updateMessageSuccess, deleteM
 import { Contact, User } from "../Model/model";
 
 export interface ContactState {
-
   contact: Contact[] | undefined
 }
 
 export const initialState: ContactState = {
-
   contact: undefined
-
 };
 
 export const storeReducer = createReducer(
   initialState,
 
   on(readMessageSuccess, (state, action) => {
-    console.log("on(readMessageSuccess")
-
+    //console.log("on(readMessageSuccess")
     return {
       ...state,
       contact: action.contact
@@ -26,7 +22,7 @@ export const storeReducer = createReducer(
   }),
 
   on(createMessageSuccess, (state, action) => {
-    console.log("on(createMessageSuccess")
+    //console.log("on(createMessageSuccess")
     let Contact: Contact = Object.assign({}, action.action.contact, { id: action.id })
     let cleared: Contact[] | undefined = state.contact
     console.log(cleared)
@@ -48,6 +44,7 @@ export const storeReducer = createReducer(
       contact: cleared
     }
   }),
+
   on(deleteMessageSuccess, (state, action) => {
     let cleared: Contact[] | undefined = state.contact
     cleared = cleared?.filter(el => el.id != action.id)

@@ -11,7 +11,7 @@ export class ContactEffects {
 
   // Todo
   createMessage$ = createEffect(() => {
-    console.log("CreateEffect")
+    //console.log("CreateEffect")
     return this.actions$.pipe(
       ofType(createMessage),
       switchMap(action => {
@@ -23,7 +23,7 @@ export class ContactEffects {
   })
 
   readMessage$ = createEffect(() => {
-    console.log("ReadEffect")
+    //console.log("ReadEffect")
     return this.actions$.pipe(
       ofType(readMessages),
       concatMap(action => this._contactService.readMessages()),

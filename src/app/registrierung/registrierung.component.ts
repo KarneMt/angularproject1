@@ -25,6 +25,9 @@ export class RegistrierungComponent {
     mail: new FormControl('', [
       Validators.required
     ], []),
+    smail: new FormControl('', [
+      Validators.required
+    ], []),
     adresse: new FormControl('', [
       Validators.required
     ], []),
@@ -33,12 +36,21 @@ export class RegistrierungComponent {
     ], []),
     plz: new FormControl('', [
       Validators.required
-    ])
+    ], []),
+    pwd: new FormControl('', [
+      Validators.required
+    ], []),
+    spwd: new FormControl('', [
+      Validators.required
+    ], [])
   });
 
   first: boolean = true
   exist: boolean = false
+  error: boolean = false
   succes: boolean = false
+  checkmail: boolean = true
+  checkpassword: boolean = true
   nutzer!: User | undefined
   zu$: Observable<User[]> | undefined
 
@@ -47,6 +59,9 @@ export class RegistrierungComponent {
   KontoErstellen(user: any) {
     this.succes = false
     this.exist = false
+    this.error = false
+    this.checkpassword = true
+    this.checkmail = true
     let uuid: string = uuidv4();
     this.nutzer = {
       id: uuid,
@@ -56,7 +71,9 @@ export class RegistrierungComponent {
       adresse: user.adresse,
       stadt: user.city,
       plz: user.plz,
-      datum: new Date
+      datum: new Date,
+      lastUpdate: new Date,
+      password: user.pwd
     }
     mail = this.nutzer.email
     //let value: string | undefined
@@ -65,54 +82,82 @@ export class RegistrierungComponent {
     //console.log(this.zu$)
 
     console.log(daten)
-    daten.forEach( (value: any) => {
+    daten.forEach((value: any) => {
       if (value.email == mail) {
         this.exist = true
+        this.error = true
       }
     });
 
-    if (this.exist === false && this.first === true) {
-      this.createTraveller(this.nutzer).subscribe(succes => this.succes = true, error => alert(error))
-      this.first = false
-      setTimeout(() => { this.route.navigate(['/login']); }, 5000);
+    if (user.mail != user.smail) {
+      this.checkmail = false
+      this.error = true
+    }
+
+    if (user.pwd != user.spwd) {
+      this.checkpassword = false
+      this.error = true
+    }
+
+    if (user.mail == user.smail && user.pwd == user.spwd) {
+      this.checkmail = false
+      this.checkpassword = false
+      this.error = false
+      this.nutzer.password = this.hash(this.nutzer)
+      console.log(this.nutzer.password)
+      if (this.exist === false && this.first === true) {
+        console.log(this.nutzer)
+        this.createUser(this.nutzer).subscribe(succes => this.succes = true, error => alert(error))
+        this.first = false
+        setTimeout(() => { this.route.navigate(['/login']); }, 5000);
+      }
     }
   }
 
+  hash(nutzer: any): string {
+    let salt: string = "S>JZatc@Uk#8Lp4LF3Wr6uta-d=p,8}),pqVjV8{azepZ=.%2X)GAAb§g+K=u%f."
+    let pwd : string = nutzer.pwd
+    var hash = require('object-hash');
+    pwd = pwd+salt
+    console.log(hash({ pwd }));
+    pwd = hash({ pwd })
+    return pwd
+  }
+
   //POST
-  createTraveller(user: User) {
+  createUser(user: User) {
     return this.httpClient.post(userDB, user);
   }
 
   //GET all oder mit value 
-//  getUser(value: string | undefined): any {
+  //  getUser(value: string | undefined): any {
 
-//    let t : string = "?q="+value
-//    let dat: any = []
-//    fetch(userDB+t)
-//      .then(res => res.json())
-//      .then(json => {
-//        json.map((data: { email: any; }) => {
-//          dat.push(data)
-//        })
-//      })
-//    console.log(dat)
-//    return dat
-//  }
-  }
+  //    let t : string = "?q="+value
+  //    let dat: any = []
+  //    fetch(userDB+t)
+  //      .then(res => res.json())
+  //      .then(json => {
+  //        json.map((data: { email: any; }) => {
+  //          dat.push(data)
+  //        })
+  //      })
+  //    console.log(dat)
+  //    return dat
+  //  }
+}
 
-var mail : string = ""
+var mail: string = ""
 export const daten: any = getUser(mail)
 
 //GET all oder mit value 
 function getUser(value: string | undefined): any {
   let email: string = "?q=" + value
   let daten: any = []
-  fetch(userDB+email)
+  fetch(userDB + email)
     .then(res => res.json())
     .then(json => {
       json.map((data: { email: any; }) => {
         daten.push(data)
-        console.log(data)
       })
     })
   return daten
