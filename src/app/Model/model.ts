@@ -11,6 +11,7 @@ export interface Contact {
   plz: string
   nachricht: string
   datum: Date
+  creatorID: string
 }
 
 export interface User {

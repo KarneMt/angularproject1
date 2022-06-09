@@ -32,7 +32,7 @@ export class IndexComponent {
     this.contactdata = contact
     console.log(this.contactdata)
     this.anfragenStore = true
-
+    contact.creatorID = "foo:bar"
     const create: Contact = Object.assign({}, contact, { date_create: new Date(), date_update: new Date() })
     this.messageFacade.createMessage(create)
     // TODO: Dispatch an increment action

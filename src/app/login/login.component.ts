@@ -2,8 +2,9 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Contact } from '../Model/model';
+import { Contact, User } from '../Model/model';
 import { userDB } from '../../jsonServerConnection';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-login',
@@ -15,10 +16,11 @@ export class LoginComponent {
   //todoForm: FormGroup
   //todoArray: FormArray
   cont: Contact[] = []
-  check : boolean = false
-
+  check: boolean = false
+  user!: User;
+  ll: any 
   public loginForm: FormGroup = new FormGroup({
-    username: new FormControl('', [
+    usermail: new FormControl('', [
       Validators.required,
     ], []),
     password: new FormControl('', [
@@ -26,9 +28,8 @@ export class LoginComponent {
     ])
   });
 
-  constructor(private cookieService: CookieService, public route: Router) {
+  constructor(private cookieService: CookieService, public route: Router, public httpclient: HttpClient) {
     this.loginForm.valueChanges.subscribe(console.log)
-
     let value = this.cookieService.get('User-Cookie');
     if (value.length > 0) {
       this.route.navigate(['/']);
@@ -38,32 +39,32 @@ export class LoginComponent {
   anmelden(user: any) {
     this.cookieService.deleteAll()
     let password: string = this.hash(user)
+    let pwd: string = ""
+    mail.forEach((value: any) => {
+      console.log(value.email)
+      console.log(user.usermail)
+      if (value.email == user.usermail) {
+        this.ll = value
+        if (this.ll.password === password) {
 
-    emailr = user.username
-    console.log(epwd)
-    let email: string = mail
-    epwd = user.password 
-    let passwort : string = pwd
+          this.cookieService.set('User-Cookie', user.usermail); //Cookie setzen
+          window.location.reload();
 
+        } else {
+          this.check = true
+        }
+      }
+    });
 
+    console.log(this.ll)
 
-    console.log(email)
-    console.log(user.username) //
-    console.log(passwort)
-    console.log(password) //
+    //this.httpclient.get(userDB).subscribe((users: any) => {
+    //})
 
-
-    if (mail == user.username && pwd == password) {
-      console.log("TEST")
-
-      this.cookieService.set('User-Cookie', user.username); //Cookie setzen
-      window.location.reload();
-
-    } else {
-      this.check = true
-    }
-
-
+    console.log(this.ll.email)
+    console.log(user.usermail)
+    console.log(this.ll.password)
+    console.log(password)
   }
 
 
@@ -78,22 +79,21 @@ export class LoginComponent {
   }
 }
 
-var emailr: any
-var epwd : any
+var mail: any = getUser("")
 
-var mail: any = getUser(emailr)
-var pwd: any = getUser(epwd)
 
 //GET all oder mit value 
 function getUser(value: string | undefined): any {
-  let src: string = "?q=" + value
   let daten: any = []
-  fetch(userDB + src)
-    .then(res => res.json())
-    .then(json => {
-      json.map((data: { email: any; }) => {
-        daten.push(data)
+  if (value != undefined) {
+    
+    fetch(userDB + value)
+      .then(res => res.json())
+      .then(json => {
+        json.map((data: any) => {
+          daten.push(data)
+        })
       })
-    })
+  }
   return daten
 }

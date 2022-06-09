@@ -50,7 +50,8 @@ export class UpdateComponent {
       stadt: this.anfragenArray![0].stadt,
       plz: this.anfragenArray![0].plz,
       nachricht: this.anfragenArray![0].nachricht,
-      datum: this.anfragenArray![0].datum
+      datum: this.anfragenArray![0].datum,
+      creatorID: this.anfragenArray![0].creatorID
     }
   }
 
