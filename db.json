@@ -54,6 +54,18 @@
       "datum": "2022-06-08T12:30:11.521Z",
       "lastUpdate": "2022-06-08T12:30:11.521Z",
       "password": "b4d5b6d9182ee1b8ab4ea3da5036ac7f9691f4a2"
+    },
+    {
+      "id": "048996f1-cbfa-479d-a4bb-33271b033627",
+      "vorname": "Kai",
+      "nachname": "Möbert",
+      "email": "kai.arne.moebert@gmail.comg",
+      "adresse": "Friedenhorster Str. 11",
+      "stadt": "Berlin",
+      "plz": "10319",
+      "datum": "2022-06-09T08:35:33.098Z",
+      "lastUpdate": "2022-06-09T08:35:33.098Z",
+      "password": "b4d5b6d9182ee1b8ab4ea3da5036ac7f9691f4a2"
     }
   ],
   "Kontaktanfragen": [

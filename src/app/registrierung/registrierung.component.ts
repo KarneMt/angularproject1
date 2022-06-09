@@ -83,9 +83,12 @@ export class RegistrierungComponent {
 
     console.log(daten)
     daten.forEach((value: any) => {
-      if (value.email == mail) {
+      console.log(value.email)
+      console.log(mail)
+      if (value.email === mail) {
         this.exist = true
         this.error = true
+        console.log("J")
       }
     });
 
@@ -99,7 +102,7 @@ export class RegistrierungComponent {
       this.error = true
     }
 
-    if (user.mail == user.smail && user.pwd == user.spwd) {
+    if (user.mail == user.smail && user.pwd == user.spwd && this.error == false) {
       this.checkmail = false
       this.checkpassword = false
       this.error = false
