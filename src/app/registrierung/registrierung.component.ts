@@ -6,6 +6,8 @@ import { HttpClient } from '@angular/common/http';
 import { userDB } from '../../jsonServerConnection';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
+import { OnInit } from '@angular/core';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-registrierung',
@@ -13,7 +15,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./registrierung.component.css']
 })
 
-export class RegistrierungComponent {
+export class RegistrierungComponent implements OnInit {
 
   public loginForm: FormGroup = new FormGroup({
     firstname: new FormControl('', [
@@ -54,7 +56,12 @@ export class RegistrierungComponent {
   nutzer!: User | undefined
   zu$: Observable<User[]> | undefined
 
-  constructor(private httpClient: HttpClient, public route: Router) { }
+  constructor(private httpClient: HttpClient, public route: Router, public cookieService: CookieService) { }
+
+    ngOnInit(): void {
+      this.cookieService.deleteAll()
+
+    }
 
   KontoErstellen(user: any) {
     this.succes = false
@@ -106,7 +113,7 @@ export class RegistrierungComponent {
       this.checkmail = false
       this.checkpassword = false
       this.error = false
-      this.nutzer.password = this.hash(this.nutzer)
+      this.nutzer.password = this.hash(this.nutzer.password)
       console.log(this.nutzer.password)
       if (this.exist === false && this.first === true) {
         console.log(this.nutzer)
@@ -117,14 +124,14 @@ export class RegistrierungComponent {
     }
   }
 
-  hash(nutzer: any): string {
+  hash(password: string): string {
     let salt: string = "S>JZatc@Uk#8Lp4LF3Wr6uta-d=p,8}),pqVjV8{azepZ=.%2X)GAAb§g+K=u%f."
-    let pwd : string = nutzer.pwd
+    console.log(password)
     var hash = require('object-hash');
-    pwd = pwd+salt
-    console.log(hash({ pwd }));
-    pwd = hash({ pwd })
-    return pwd
+    password = password+salt
+    password = hash({ password })
+    console.log(password)
+    return password
   }
 
   //POST

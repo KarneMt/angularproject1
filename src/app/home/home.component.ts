@@ -2,6 +2,7 @@ import { Component, Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { Auth } from '../shared/auth';
 
 @Injectable({ providedIn: 'root' }) //DB
 
@@ -14,18 +15,17 @@ export class HomeComponent {
   contact: any = { plz: '12345', strasse: 'Hausmannsweg 1' };
   val: string = 'Test';
   title = 'angularproject1';
-  usernameCookie = ''
-   
+  usernameSession: string | null
+  
   private url = `http://localhost:5197/WeatherForecast`; //DB
   array: any[] = []
 
   constructor(private cookieService: CookieService, public route: Router, private readonly http: HttpClient) {
-    let value = this.cookieService.get('User-Cookie');
-    if (value.length <= 0) {
-      this.route.navigate(['/login']);
-    } else {
-      this.usernameCookie = value
-    }
+
+    new Auth(route);
+
+    this.usernameSession = sessionStorage.getItem('User-Session');
+
     this.array = this.DatenbankWetterAbfragen()
 }
 

@@ -30,52 +30,64 @@ export class LoginComponent {
 
   constructor(private cookieService: CookieService, public route: Router, public httpclient: HttpClient) {
     this.loginForm.valueChanges.subscribe(console.log)
-    let value = this.cookieService.get('User-Cookie');
-    if (value.length > 0) {
+    let value = sessionStorage.getItem('User-Session');
+    console.log(value)
+    if (value != null) {
       this.route.navigate(['/']);
     }
   }
 
   anmelden(user: any) {
     this.cookieService.deleteAll()
-    let password: string = this.hash(user)
-    let pwd: string = ""
-    mail.forEach((value: any) => {
-      console.log(value.email)
-      console.log(user.usermail)
-      if (value.email == user.usermail) {
-        this.ll = value
+    let password: string = this.hash(user.password)
+    let i: number = mail.length
+    let n: number = 0
+    console.log(i)
+    while (n < i) {
+      mail[n]
+      console.log(mail[n].email)
+
+      if (mail[n].email == user.usermail) {
+        console.log("MAIL PASST")
+        this.ll = mail[n]
         if (this.ll.password === password) {
-
-          this.cookieService.set('User-Cookie', user.usermail); //Cookie setzen
+          console.log(user.usermail)
+          console.log(mail[n].email)
+          console.log(this.ll)
+          console.log(this.ll.password)
+          console.log(password)
+          //this.cookieService.set('User-Cookie', user.usermail); //Cookie setzen
+          sessionStorage.setItem('User-Session', user.usermail)
           window.location.reload();
-
+          break
         } else {
+          console.log("PAssworet")
           this.check = true
+          break
         }
       }
-    });
-
-    console.log(this.ll)
-
+      
+      n++
+      console.log("i: " + i + " & n: " + n)
+      if (n == i) {
+        console.log("mail")
+        this.check = true
+      }
+    }
     //this.httpclient.get(userDB).subscribe((users: any) => {
     //})
-
-    console.log(this.ll.email)
-    console.log(user.usermail)
-    console.log(this.ll.password)
-    console.log(password)
   }
 
 
 
-  hash(nutzer: any): string {
+  hash(password: string): string {
+    console.log(password)
     let salt: string = "S>JZatc@Uk#8Lp4LF3Wr6uta-d=p,8}),pqVjV8{azepZ=.%2X)GAAb§g+K=u%f."
-    let pwd: string = nutzer.pwd
     var hash = require('object-hash');
-    pwd = pwd + salt
-    nutzer.pwd = hash({ pwd })
-    return nutzer.pwd
+    password = password + salt
+    password = hash({ password })
+    console.log(password)
+    return password
   }
 }
 

@@ -18,8 +18,9 @@ export class IndexComponent {
   contactdata: any = {}
 
   constructor(private cookieService: CookieService, private _formBuilder: FormBuilder, private store: Store<{ contact: Contact }>, public route: Router, private messageFacade: ContactFacade) {
-    let value = this.cookieService.get('User-Cookie');
-    if (value.length <= 0) {
+    let value = sessionStorage.getItem('User-Session');
+    console.log(value)
+    if (value == null) {
       this.route.navigate(['/login']);
     }
   }
