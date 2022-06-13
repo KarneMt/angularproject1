@@ -6,6 +6,7 @@ import { Contact } from '../Model/model';
 import { v4 as uuidv4 } from 'uuid';
 import { ContactFacade } from '../store/store.facade'
 import { FormBuilder } from '@angular/forms';
+import { Auth } from '../shared/auth';
 
 
 @Component({
@@ -17,12 +18,8 @@ import { FormBuilder } from '@angular/forms';
 export class IndexComponent {
   contactdata: any = {}
 
-  constructor(private cookieService: CookieService, private _formBuilder: FormBuilder, private store: Store<{ contact: Contact }>, public route: Router, private messageFacade: ContactFacade) {
-    let value = sessionStorage.getItem('User-Session');
-    console.log(value)
-    if (value == null) {
-      this.route.navigate(['/login']);
-    }
+  constructor(private cookieService: CookieService, private _formBuilder: FormBuilder, private store: Store<{ contact: Contact }>, public route: Router, private messageFacade: ContactFacade, private auth: Auth) {
+    auth.authcheck()
   }
 
   message(contact: Contact){

@@ -17,7 +17,6 @@ export class LogoutComponent implements OnInit {
 
   ngOnInit(): void {
     this.cookieService.deleteAll()
-    sessionStorage.removeItem('User-Session')
     this.store.dispatch(new Logout());
     this.route.navigate(['/login']);
   }

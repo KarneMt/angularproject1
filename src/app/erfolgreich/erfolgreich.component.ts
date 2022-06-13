@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { Contact } from '../Model/model';
+import { Auth } from '../shared/auth';
 
 @Component({
   selector: 'app-erfolgreich',
@@ -14,11 +15,9 @@ export class ErfolgreichComponent implements OnInit{
   @Input() contact: Contact = { id: '', vorname: '', nachname: '', beschreibung: '', email: '', land: '', adresse: '', stadt: '', plz: '', nachricht: '', datum: new Date, creatorID: "" }
 
 
-  constructor(private cookieService: CookieService, public route: Router) {
-    let value = this.cookieService.get('User-Cookie');
-    if (value.length <= 0) {
-      this.route.navigate(['/login']);
-    }  }
+  constructor(private cookieService: CookieService, private auth: Auth) {
+    auth.authcheck()
+  }
 
 
   ngOnInit(): void {

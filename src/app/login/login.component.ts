@@ -18,22 +18,31 @@ export class LoginComponent {
   cont: Contact[] = []
   check: boolean = false
   user!: User;
-  ll: any 
+  ll: any
+  rememberme: boolean = false
   public loginForm: FormGroup = new FormGroup({
     usermail: new FormControl('', [
       Validators.required,
     ], []),
     password: new FormControl('', [
       Validators.required
-    ])
+    ], [])
   });
 
   constructor(private cookieService: CookieService, public route: Router, public httpclient: HttpClient) {
     this.loginForm.valueChanges.subscribe(console.log)
-    let value = sessionStorage.getItem('User-Session');
+    let value = this.cookieService.get('User-Cookie')
     console.log(value)
-    if (value != null) {
+    if (value != "") {
       this.route.navigate(['/']);
+    }
+  }
+
+  remember(event: any) {
+    if (this.rememberme == false) {
+      this.rememberme = true
+    } else {
+      this.rememberme = false
     }
   }
 
@@ -56,9 +65,19 @@ export class LoginComponent {
           console.log(this.ll)
           console.log(this.ll.password)
           console.log(password)
-          //this.cookieService.set('User-Cookie', user.usermail); //Cookie setzen
-          sessionStorage.setItem('User-Session', user.usermail)
-          window.location.reload();
+
+          console.log(this.rememberme)
+          if (this.rememberme == false) {
+            this.cookieService.set('User-Cookie', user.usermail); //Cookie setzen
+          } else {
+            let time = new Date()
+            console.log(time)
+            time.setTime(time.getTime() + 1209600000); //14 Tage angemeldet bleiben
+            console.log(time.toLocaleString())
+            this.cookieService.set('User-Cookie', user.usermail, { expires: 14 }); //Cookie setzen
+          }
+
+          //window.location.reload();
           break
         } else {
           console.log("PAssworet")

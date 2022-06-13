@@ -15,9 +15,12 @@ export class MenueComponent implements OnInit {
   userIP = ''
   userNameCookie: boolean = false
 
-  constructor(private httpClient: HttpClient, private cookieService: CookieService, public route: Router) {
-    new Auth(route);
-    this.userNameCookie = true
+  constructor(private httpClient: HttpClient, private cookieService: CookieService, public route: Router, private auth: Auth) {
+    auth.authcheck()
+    let value = this.cookieService.get('User-Cookie');
+    if (value != "") {
+      this.userNameCookie = true
+    }
   }
 
   ngOnInit(): void {
