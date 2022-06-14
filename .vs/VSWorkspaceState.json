@@ -3,14 +3,14 @@
     "",
     "\\src",
     "\\src\\app",
-    "\\src\\app\\list",
-    "\\src\\app\\menue",
-    "\\src\\app\\Model",
-    "\\src\\app\\navbar",
-    "\\src\\app\\shared",
-    "\\src\\app\\shared\\pipes",
-    "\\src\\app\\shared\\pipes\\order-by"
+    "\\src\\app\\anfragen",
+    "\\src\\app\\erfolgreich",
+    "\\src\\app\\home",
+    "\\src\\app\\logout",
+    "\\src\\app\\registrierung",
+    "\\src\\app\\store",
+    "\\src\\app\\update"
   ],
-  "SelectedNode": "\\src\\app\\shared\\auth.ts",
+  "SelectedNode": "\\src\\app\\login\\login.component.ts",
   "PreviewInSolutionExplorer": false
 }

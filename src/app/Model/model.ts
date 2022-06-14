@@ -26,3 +26,8 @@ export interface User {
   lastUpdate: Date
   password : string
 }
+
+export interface Cookie {
+  id: string | undefined
+  ablauf: Date | undefined
+}

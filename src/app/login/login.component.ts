@@ -2,9 +2,10 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Contact, User } from '../Model/model';
-import { userDB } from '../../jsonServerConnection';
+import { Contact, User, Cookie } from '../Model/model';
+import { cookieDB, userDB } from '../../jsonServerConnection';
 import { HttpClient } from '@angular/common/http';
+import { v4 as uuidv4 } from 'uuid';
 
 @Component({
   selector: 'app-login',
@@ -18,6 +19,7 @@ export class LoginComponent {
   cont: Contact[] = []
   check: boolean = false
   user!: User;
+  cookie: Cookie = { id: "", ablauf: new Date() }
   ll: any
   rememberme: boolean = false
   public loginForm: FormGroup = new FormGroup({
@@ -46,11 +48,18 @@ export class LoginComponent {
     }
   }
 
+  createDb(cookie: Cookie) {
+    console.log(cookie)
+    return this.httpclient.post(cookieDB, cookie)
+
+  }
+
   anmelden(user: any) {
     this.cookieService.deleteAll()
     let password: string = this.hash(user.password)
     let i: number = mail.length
     let n: number = 0
+    console.log(password)
     console.log(i)
     while (n < i) {
       mail[n]
@@ -59,7 +68,7 @@ export class LoginComponent {
       if (mail[n].email == user.usermail) {
         console.log("MAIL PASST")
         this.ll = mail[n]
-        if (this.ll.password === password) {
+        if (this.ll.password == password) {
           console.log(user.usermail)
           console.log(mail[n].email)
           console.log(this.ll)
@@ -67,17 +76,25 @@ export class LoginComponent {
           console.log(password)
 
           console.log(this.rememberme)
+          this.cookie.id = uuidv4();
+          let time = new Date()
           if (this.rememberme == false) {
-            this.cookieService.set('User-Cookie', user.usermail); //Cookie setzen
-          } else {
-            let time = new Date()
+
             console.log(time)
+            time.setTime(time.getTime() + 86400000); //1 Tage angemeldet bleiben
+            console.log(time.toLocaleString())
+            this.cookie.ablauf = time
+            this.createDb(this.cookie).subscribe(succes => true, error => alert(error))
+            this.cookieService.set('User-Cookie', this.cookie.id, { expires: 1 }); //Cookie setzen
+          } else {
+
             time.setTime(time.getTime() + 1209600000); //14 Tage angemeldet bleiben
             console.log(time.toLocaleString())
-            this.cookieService.set('User-Cookie', user.usermail, { expires: 14 }); //Cookie setzen
+            this.cookie.ablauf = time
+            this.createDb(this.cookie).subscribe(succes => true, error => alert(error))
+            this.cookieService.set('User-Cookie', this.cookie.id, { expires: 14 }); //Cookie setzen
           }
-
-          //window.location.reload();
+          window.location.reload();
           break
         } else {
           console.log("PAssworet")
@@ -85,7 +102,7 @@ export class LoginComponent {
           break
         }
       }
-      
+
       n++
       console.log("i: " + i + " & n: " + n)
       if (n == i) {
@@ -99,14 +116,13 @@ export class LoginComponent {
 
 
 
-  hash(password: string): string {
-    console.log(password)
+  hash(item: string): string {
     let salt: string = "S>JZatc@Uk#8Lp4LF3Wr6uta-d=p,8}),pqVjV8{azepZ=.%2X)GAAb§g+K=u%f."
     var hash = require('object-hash');
-    password = password + salt
-    password = hash({ password })
-    console.log(password)
-    return password
+    let password: string = item + salt
+    console.log(item)
+    item = hash({ password })
+    return item
   }
 }
 
@@ -117,7 +133,7 @@ var mail: any = getUser("")
 function getUser(value: string | undefined): any {
   let daten: any = []
   if (value != undefined) {
-    
+
     fetch(userDB + value)
       .then(res => res.json())
       .then(json => {
