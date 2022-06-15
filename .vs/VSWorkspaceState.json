@@ -3,14 +3,14 @@
     "",
     "\\src",
     "\\src\\app",
-    "\\src\\app\\anfragen",
-    "\\src\\app\\login",
-    "\\src\\app\\Model",
-    "\\src\\app\\navbar",
+    "\\src\\app\\home",
+    "\\src\\app\\index",
+    "\\src\\app\\logout",
     "\\src\\app\\shared",
-    "\\src\\app\\store",
-    "\\src\\app\\store\\hydration"
+    "\\src\\app\\shared\\pipes",
+    "\\src\\app\\shared\\pipes\\order-by",
+    "\\src\\app\\shared\\pipes\\simpleOrderBy"
   ],
-  "SelectedNode": "\\src\\app\\store\\store.Datenbank.ts",
+  "SelectedNode": "\\src\\app\\login\\login.component.ts",
   "PreviewInSolutionExplorer": false
 }
