@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
+import { Auth } from '../shared/auth';
 
 @Component({
   selector: 'app-menue',
@@ -14,9 +15,10 @@ export class MenueComponent implements OnInit {
   userIP = ''
   userNameCookie: boolean = false
 
-  constructor(private httpClient: HttpClient, private cookieService: CookieService, public route: Router) {
+  constructor(private httpClient: HttpClient, private cookieService: CookieService, public route: Router, private auth: Auth) {
+    auth.authcheck()
     let value = this.cookieService.get('User-Cookie');
-    if (value.length > 0) {
+    if (value != "") {
       this.userNameCookie = true
     }
   }

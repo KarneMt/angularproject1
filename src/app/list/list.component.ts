@@ -7,6 +7,7 @@ import { orderBy } from '../shared/helpfunction';
 import { RootState } from '../store/hydration';
 import { ContactFacade } from '../store/store.facade'
 import { FormArray, FormGroup, FormBuilder } from '@angular/forms';
+import { Auth } from '../shared/auth';
 
 @Component({
   selector: 'app-list',
@@ -21,11 +22,8 @@ export class ListComponent implements OnInit {
   todoArray: FormArray
   cont: Contact[] = []
 
-  constructor(private cookieService: CookieService, private messageFacade: ContactFacade, private _formBuilder: FormBuilder, private store: Store<RootState>, public route: Router) {
-    let value = this.cookieService.get('User-Cookie');
-    if (value.length <= 0) {
-      this.route.navigate(['/login']);
-    }
+  constructor(private cookieService: CookieService, private messageFacade: ContactFacade, private _formBuilder: FormBuilder, private store: Store<RootState>, public route: Router, private auth: Auth) {
+    auth.authcheck()
     this.messageFacade.readMessages()
     this.todoForm = this._formBuilder.group({
       contact: this._formBuilder.array([

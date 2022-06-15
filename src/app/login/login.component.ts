@@ -2,8 +2,10 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Contact } from '../Model/model';
-import { userDB } from '../../jsonServerConnection';
+import { Contact, User, Cookie } from '../Model/model';
+import { cookieDB, userDB } from '../../jsonServerConnection';
+import { HttpClient } from '@angular/common/http';
+import { v4 as uuidv4 } from 'uuid';
 
 @Component({
   selector: 'app-login',
@@ -15,85 +17,130 @@ export class LoginComponent {
   //todoForm: FormGroup
   //todoArray: FormArray
   cont: Contact[] = []
-  check : boolean = false
-
+  check: boolean = false
+  user!: User;
+  cookie: Cookie = { id: "", ablauf: new Date() }
+  ll: any
+  rememberme: boolean = false
   public loginForm: FormGroup = new FormGroup({
-    username: new FormControl('', [
+    usermail: new FormControl('', [
       Validators.required,
     ], []),
     password: new FormControl('', [
       Validators.required
-    ])
+    ], [])
   });
 
-  constructor(private cookieService: CookieService, public route: Router) {
+  constructor(private cookieService: CookieService, public route: Router, public httpclient: HttpClient) {
     this.loginForm.valueChanges.subscribe(console.log)
-
-    let value = this.cookieService.get('User-Cookie');
-    if (value.length > 0) {
+    let value = this.cookieService.get('User-Cookie')
+    console.log(value)
+    if (value != "") {
       this.route.navigate(['/']);
     }
   }
 
+  remember(event: any) {
+    if (this.rememberme == false) {
+      this.rememberme = true
+    } else {
+      this.rememberme = false
+    }
+  }
+
+  createDb(cookie: Cookie) {
+    console.log(cookie)
+    return this.httpclient.post(cookieDB, cookie)
+
+  }
+
   anmelden(user: any) {
     this.cookieService.deleteAll()
-    let password: string = this.hash(user)
+    let password: string = this.hash(user.password)
+    let i: number = mail.length
+    let n: number = 0
+    console.log(password)
+    console.log(i)
+    while (n < i) {
+      mail[n]
+      console.log(mail[n].email)
 
-    emailr = user.username
-    console.log(epwd)
-    let email: string = mail
-    epwd = user.password 
-    let passwort : string = pwd
+      if (mail[n].email == user.usermail) {
+        console.log("MAIL PASST")
+        this.ll = mail[n]
+        if (this.ll.password == password) {
+          console.log(user.usermail)
+          console.log(mail[n].email)
+          console.log(this.ll)
+          console.log(this.ll.password)
+          console.log(password)
 
+          console.log(this.rememberme)
+          this.cookie.id = uuidv4();
+          let time = new Date()
+          if (this.rememberme == false) {
 
+            console.log(time)
+            time.setTime(time.getTime() + 86400000); //1 Tage angemeldet bleiben
+            console.log(time.toLocaleString())
+            this.cookie.ablauf = time
+            this.createDb(this.cookie).subscribe(succes => true, error => alert(error))
+            this.cookieService.set('User-Cookie', this.cookie.id, { expires: 1 }); //Cookie setzen
+          } else {
 
-    console.log(email)
-    console.log(user.username) //
-    console.log(passwort)
-    console.log(password) //
+            time.setTime(time.getTime() + 1209600000); //14 Tage angemeldet bleiben
+            console.log(time.toLocaleString())
+            this.cookie.ablauf = time
+            this.createDb(this.cookie).subscribe(succes => true, error => alert(error))
+            this.cookieService.set('User-Cookie', this.cookie.id, { expires: 14 }); //Cookie setzen
+          }
+          window.location.reload();
+          break
+        } else {
+          console.log("PAssworet")
+          this.check = true
+          break
+        }
+      }
 
-
-    if (mail == user.username && pwd == password) {
-      console.log("TEST")
-
-      this.cookieService.set('User-Cookie', user.username); //Cookie setzen
-      window.location.reload();
-
-    } else {
-      this.check = true
+      n++
+      console.log("i: " + i + " & n: " + n)
+      if (n == i) {
+        console.log("mail")
+        this.check = true
+      }
     }
-
-
+    //this.httpclient.get(userDB).subscribe((users: any) => {
+    //})
   }
 
 
 
-  hash(nutzer: any): string {
+  hash(item: string): string {
     let salt: string = "S>JZatc@Uk#8Lp4LF3Wr6uta-d=p,8}),pqVjV8{azepZ=.%2X)GAAb§g+K=u%f."
-    let pwd: string = nutzer.pwd
     var hash = require('object-hash');
-    pwd = pwd + salt
-    nutzer.pwd = hash({ pwd })
-    return nutzer.pwd
+    let password: string = item + salt
+    console.log(item)
+    item = hash({ password })
+    return item
   }
 }
 
-var emailr: any
-var epwd : any
+var mail: any = getUser("")
 
-var mail: any = getUser(emailr)
-var pwd: any = getUser(epwd)
 
 //GET all oder mit value 
 function getUser(value: string | undefined): any {
-  let src: string = "?q=" + value
   let daten: any = []
-  fetch(userDB + src)
-    .then(res => res.json())
-    .then(json => {
-      json.map((data: { email: any; }) => {
-        daten.push(data)
+  if (value != undefined) {
+
+    fetch(userDB + value)
+      .then(res => res.json())
+      .then(json => {
+        json.map((data: any) => {
+          daten.push(data)
+        })
       })
-    })
+  }
   return daten
 }

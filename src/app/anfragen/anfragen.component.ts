@@ -7,6 +7,7 @@ import { RootState } from '../store/hydration';
 import * as pdfMake from 'pdfmake/build/pdfmake';
 import * as pdfFonts from "pdfmake/build/vfs_fonts";
 import { ContactFacade } from '../store/store.facade'
+import { Auth } from '../shared/auth';
 
 @Component({
   selector: 'app-anfragen',
@@ -27,11 +28,9 @@ export class AnfragenComponent {
   anfragenArray?: Contact[];
   cont: Contact[] = []
 
-  constructor(private cookieService: CookieService, private store: Store<RootState>, public router: Router, private route: ActivatedRoute, private messageFacade: ContactFacade) {
-    let value = this.cookieService.get('User-Cookie');
-    if (value.length <= 0) {
-      this.router.navigate(['/login']);
-    } this.pdfM = pdfMake
+  constructor(private cookieService: CookieService, private store: Store<RootState>, public router: Router, private route: ActivatedRoute, private messageFacade: ContactFacade, private auth: Auth) {
+    auth.authcheck()
+    this.pdfM = pdfMake
     this.pdfM.vfs = pdfFonts.pdfMake.vfs
     this.page = 1
 

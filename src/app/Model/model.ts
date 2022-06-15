@@ -11,6 +11,7 @@ export interface Contact {
   plz: string
   nachricht: string
   datum: Date
+  creatorID: string
 }
 
 export interface User {
@@ -24,4 +25,9 @@ export interface User {
   datum: Date
   lastUpdate: Date
   password : string
+}
+
+export interface Cookie {
+  id: string | undefined
+  ablauf: Date | undefined
 }

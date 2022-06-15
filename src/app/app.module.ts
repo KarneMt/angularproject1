@@ -33,6 +33,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { ContactService } from './store/store.service';
 import { ContactFacade } from './store/store.facade';
 import { CommonModule } from '@angular/common';
+import { Auth } from './shared/auth';
 
 
 const routes: Routes = [
@@ -94,7 +95,7 @@ const routes: Routes = [
   exports: [
     IndexComponent
   ],
-  providers: [CookieService, ContactFacade, ContactService],
+  providers: [CookieService, ContactFacade, ContactService, Auth],
   bootstrap: [AppComponent]
 })
 export class AppModule {

@@ -6,6 +6,7 @@ import { Contact } from '../Model/model';
 import { v4 as uuidv4 } from 'uuid';
 import { ContactFacade } from '../store/store.facade'
 import { FormBuilder } from '@angular/forms';
+import { Auth } from '../shared/auth';
 
 
 @Component({
@@ -17,11 +18,8 @@ import { FormBuilder } from '@angular/forms';
 export class IndexComponent {
   contactdata: any = {}
 
-  constructor(private cookieService: CookieService, private _formBuilder: FormBuilder, private store: Store<{ contact: Contact }>, public route: Router, private messageFacade: ContactFacade) {
-    let value = this.cookieService.get('User-Cookie');
-    if (value.length <= 0) {
-      this.route.navigate(['/login']);
-    }
+  constructor(private cookieService: CookieService, private _formBuilder: FormBuilder, private store: Store<{ contact: Contact }>, public route: Router, private messageFacade: ContactFacade, private auth: Auth) {
+    auth.authcheck()
   }
 
   message(contact: Contact){
@@ -32,7 +30,7 @@ export class IndexComponent {
     this.contactdata = contact
     console.log(this.contactdata)
     this.anfragenStore = true
-
+    contact.creatorID = "foo:bar"
     const create: Contact = Object.assign({}, contact, { date_create: new Date(), date_update: new Date() })
     this.messageFacade.createMessage(create)
     // TODO: Dispatch an increment action

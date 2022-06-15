@@ -3,13 +3,13 @@
     "",
     "\\src",
     "\\src\\app",
+    "\\src\\app\\anfragen",
+    "\\src\\app\\erfolgreich",
     "\\src\\app\\home",
-    "\\src\\app\\index",
     "\\src\\app\\logout",
-    "\\src\\app\\shared",
-    "\\src\\app\\shared\\pipes",
-    "\\src\\app\\shared\\pipes\\order-by",
-    "\\src\\app\\shared\\pipes\\simpleOrderBy"
+    "\\src\\app\\registrierung",
+    "\\src\\app\\store",
+    "\\src\\app\\update"
   ],
   "SelectedNode": "\\src\\app\\login\\login.component.ts",
   "PreviewInSolutionExplorer": false

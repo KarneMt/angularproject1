@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { CookieService } from 'ngx-cookie-service';
 import { Contact } from '../Model/model';
+import { Auth } from '../shared/auth';
 import { RootState } from '../store/hydration';
 import { updateMessage } from '../store/store.actions';
 import { ContactFacade } from '../store/store.facade';
@@ -21,11 +22,8 @@ export class UpdateComponent {
 
   person: Contact
 
-  constructor(private route: ActivatedRoute, public router: Router, private cookieService: CookieService, private store: Store<RootState>, private messageFacade: ContactFacade) {
-    let value = this.cookieService.get('User-Cookie');
-    if (value.length <= 0) {
-      this.router.navigate(['/login']);
-    }
+  constructor(private route: ActivatedRoute, public router: Router, private cookieService: CookieService, private store: Store<RootState>, private messageFacade: ContactFacade, private auth: Auth) {
+    auth.authcheck()
     this.route.queryParams.subscribe(params => {
       this.idString = params['id']
       console.log(this.idString)
@@ -50,7 +48,8 @@ export class UpdateComponent {
       stadt: this.anfragenArray![0].stadt,
       plz: this.anfragenArray![0].plz,
       nachricht: this.anfragenArray![0].nachricht,
-      datum: this.anfragenArray![0].datum
+      datum: this.anfragenArray![0].datum,
+      creatorID: this.anfragenArray![0].creatorID
     }
   }
 
