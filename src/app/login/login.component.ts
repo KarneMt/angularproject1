@@ -83,6 +83,7 @@ export class LoginComponent {
             console.log(time)
             time.setTime(time.getTime() + 86400000); //1 Tage angemeldet bleiben
             console.log(time.toLocaleString())
+
             this.cookie.ablauf = time
             this.createDb(this.cookie).subscribe(succes => true, error => alert(error))
             this.cookieService.set('User-Cookie', this.cookie.id, { expires: 1 }); //Cookie setzen
